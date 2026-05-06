@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finally Feel Like a Real Creator — Content Crore Cohort Batch 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0A0905;--white:#F5F0E8;--orange:#D4460F;--ol:#FF6B35;
+  --odim:#7A2808;--cream:#EDE8DE;--cd:#C8C3B9;--gray:#7A756D;
+  --gd:#2A2720;--green:#1A5C3A;--gl:#2A8A58;--gold:#C9900C;
+  --card:#0F0D08;--bdr:#3A3730;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.5}
+
+/* ── STICKY ── */
+.sticky{position:fixed;top:0;left:0;right:0;z-index:998;background:rgba(10,9,5,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(212,70,15,.2);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;transform:translateY(-100%);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.sticky.show{transform:translateY(0)}
+.si-info{display:flex;flex-direction:column;gap:2px}
+.si-info strong{font-size:13px;color:var(--white)}
+.si-info span{font-size:11px;color:var(--ol);font-weight:600;letter-spacing:.04em}
+.btn-stk{background:var(--orange);color:var(--white);border:none;padding:9px 22px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;border-radius:3px;white-space:nowrap;transition:background .2s}
+.btn-stk:hover{background:var(--ol)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding:100px 24px 80px;position:relative;overflow:hidden}
+.hglow{position:absolute;top:-100px;right:-200px;width:800px;height:800px;background:radial-gradient(ellipse,rgba(212,70,15,.1) 0%,transparent 65%);pointer-events:none}
+.hglow2{position:absolute;bottom:-200px;left:-100px;width:600px;height:600px;background:radial-gradient(ellipse,rgba(212,70,15,.05) 0%,transparent 65%);pointer-events:none}
+.hi{max-width:920px;margin:0 auto;position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(212,70,15,.12);border:1px solid rgba(212,70,15,.35);padding:6px 14px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ol);margin-bottom:28px;animation:fu .6s ease both}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--ol);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,11vw,120px);line-height:.9;letter-spacing:.01em;color:var(--white);animation:fu .6s .1s ease both}
+.h1 .acc{color:var(--orange)}
+.h1 .itl{font-family:'DM Serif Display',serif;font-style:italic}
+.hsub{margin-top:28px;font-size:clamp(15px,2vw,19px);color:var(--cd);max-width:620px;line-height:1.7;animation:fu .6s .2s ease both}
+.hsub strong{color:var(--white)}
+.stats-row{margin-top:40px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;animation:fu .6s .3s ease both}
+.stat{display:flex;flex-direction:column}
+.stat .n{font-family:'Bebas Neue',sans-serif;font-size:40px;line-height:1;color:var(--ol)}
+.stat .l{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-top:2px}
+.sdiv{width:1px;height:36px;background:var(--bdr)}
+.hbtns{margin-top:44px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;animation:fu .6s .4s ease both}
+.btn-main{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:var(--white);border:none;padding:17px 34px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;letter-spacing:.03em;cursor:pointer;border-radius:4px;text-decoration:none;transition:all .2s;position:relative;overflow:hidden}
+.btn-main::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,.07),transparent);pointer-events:none}
+.btn-main:hover{background:var(--ol);transform:translateY(-2px);box-shadow:0 12px 36px rgba(212,70,15,.4)}
+.btn-main .arr{transition:transform .2s}
+.btn-main:hover .arr{transform:translateX(4px)}
+.hnote{font-size:13px;color:var(--gray)}
+.hnote strong{color:var(--cd)}
+.seats-pill{margin-top:18px;display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--ol);font-weight:600;animation:fu .6s .5s ease both}
+@keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── LAYOUT ── */
+section{padding:80px 24px}
+.si{max-width:920px;margin:0 auto}
+.lbl{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:14px}
+.sh{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,6vw,68px);line-height:.95;letter-spacing:.02em;color:var(--white);margin-bottom:20px}
+.sh .acc{color:var(--orange)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.vis{opacity:1;transform:translateY(0)}
+
+/* ── PAIN ── */
+.pain-sec{background:var(--black)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;margin-top:44px}
+.pc{background:var(--gd);padding:28px 24px;border-left:3px solid var(--odim);transition:border-color .2s,background .2s}
+.pc:hover{border-left-color:var(--orange);background:#2A2720}
+.pc .pi{font-size:26px;margin-bottom:12px}
+.pc h3{font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px}
+.pc p{font-size:13px;color:var(--gray);line-height:1.6}
+
+/* ── STORY ── */
+.story-sec{background:linear-gradient(135deg,#0D0B07 0%,#171410 100%);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr)}
+.slay{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+@media(max-width:680px){.slay{grid-template-columns:1fr;gap:40px}}
+.snitem{display:flex;align-items:flex-start;gap:18px;padding:22px 0;border-bottom:1px solid var(--bdr)}
+.snitem:last-child{border-bottom:none}
+.snnum{font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;color:var(--orange);min-width:80px}
+.sntxt .t{font-size:15px;font-weight:600;color:var(--white);margin-bottom:3px}
+.sntxt .s{font-size:13px;color:var(--gray)}
+.sright h2{font-family:'DM Serif Display',serif;font-size:clamp(24px,3.5vw,36px);line-height:1.25;color:var(--white);margin-bottom:18px}
+.sright h2 em{color:var(--ol);font-style:italic}
+.sright p{font-size:14px;color:var(--cd);line-height:1.75;margin-bottom:14px}
+.squote{margin-top:22px;padding:18px 20px;border-left:3px solid var(--orange);background:rgba(212,70,15,.06);font-size:14px;font-style:italic;color:var(--cream);line-height:1.7}
+
+/* ── OFFER STACK ── */
+.offer-sec{background:var(--black)}
+.stack{margin-top:44px;border:1px solid var(--bdr);border-radius:8px;overflow:hidden}
+.oi{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:22px 26px;border-bottom:1px solid var(--bdr);background:var(--card);transition:background .2s}
+.oi:last-child{border-bottom:none}
+.oi:hover{background:#161410}
+.oi .ico{font-size:26px}
+.oi .oc h3{font-size:15px;font-weight:700;color:var(--white);margin-bottom:4px}
+.oi .oc p{font-size:13px;color:var(--gray);line-height:1.5}
+.oi.bonus{background:#0A0F0C}
+.oi.bonus:hover{background:#0F1710}
+.btag{display:inline-block;background:var(--orange);color:var(--white);font-size:9px;font-weight:700;letter-spacing:.08em;padding:2px 7px;border-radius:2px;text-transform:uppercase;margin-left:8px;vertical-align:middle}
+.oval{text-align:right;white-space:nowrap}
+.oval .vl{font-size:10px;color:var(--gray);text-transform:uppercase;letter-spacing:.08em}
+.oval .va{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gl);line-height:1}
+.stotal{background:var(--gd);padding:20px 26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.stl{font-size:14px;color:var(--cd)}
+.stl strong{color:var(--white);font-size:15px}
+.stp{display:flex;align-items:baseline;gap:12px}
+.stw{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--gray);text-decoration:line-through;opacity:.45}
+.str{font-family:'Bebas Neue',sans-serif;font-size:56px;color:var(--ol);line-height:1}
+.stc{font-size:22px;color:var(--ol);margin-bottom:8px}
+
+/* ── CURRICULUM ── */
+.curr-sec{background:linear-gradient(180deg,var(--black) 0%,#0D0B07 100%);border-top:1px solid var(--bdr)}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;margin-top:44px}
+.sc{padding:30px 22px;background:var(--gd);position:relative;overflow:hidden;transition:transform .25s}
+.sc:hover{transform:translateY(-4px)}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.sc:nth-child(1)::before{background:var(--orange)}
+.sc:nth-child(2)::before{background:#1A6BC8}
+.sc:nth-child(3)::before{background:var(--gl)}
+.sc:nth-child(4)::before{background:var(--gold)}
+.sc .snum{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:.15em;color:var(--gray);margin-bottom:6px}
+.sc .sdate{font-size:12px;color:var(--ol);font-weight:600;margin-bottom:14px}
+.sc h3{font-family:'DM Serif Display',serif;font-size:20px;color:var(--white);line-height:1.2;margin-bottom:10px}
+.sc p{font-size:13px;color:var(--gray);line-height:1.6;margin-bottom:14px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:10px;padding:3px 8px;border:1px solid var(--bdr);border-radius:2px;color:var(--cd);background:rgba(255,255,255,.03)}
+
+/* ── GUARANTEE ── */
+.guar-sec{background:#070D09;border-top:1px solid rgba(42,138,88,.25);border-bottom:1px solid rgba(42,138,88,.25)}
+.gbox{border:1px solid rgba(42,138,88,.35);border-radius:8px;padding:48px 40px;background:rgba(26,92,58,.07);max-width:680px;margin:0 auto;text-align:center;position:relative;overflow:hidden}
+.gbox::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:400px;height:300px;background:radial-gradient(ellipse,rgba(42,138,88,.12) 0%,transparent 70%);pointer-events:none}
+.gico{font-size:48px;margin-bottom:18px}
+.gbox h2{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--white);letter-spacing:.03em;margin-bottom:18px}
+.gt{font-size:15px;color:var(--cd);line-height:1.75;margin-bottom:14px}
+.gt strong{color:var(--white)}
+.gsig{font-family:'DM Serif Display',serif;font-style:italic;font-size:18px;color:var(--gl);margin-top:20px}
+
+/* ── PROOF ── */
+.proof-sec{background:var(--black)}
+.prgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;margin-top:44px}
+.prcard{background:var(--gd);padding:26px 22px;position:relative}
+.plat{position:absolute;top:18px;right:18px;font-size:10px;color:var(--ol);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.stars{color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:10px}
+.pt{font-size:14px;color:var(--cd);line-height:1.7;margin-bottom:14px;font-style:italic}
+.pa{font-size:13px;font-weight:700;color:var(--white)}
+.ph{font-size:12px;color:var(--gray)}
+
+/* ── FAQ ── */
+.faq-sec{background:var(--black);border-top:1px solid var(--bdr)}
+.flist{margin-top:44px;max-width:660px}
+.fitem{border-bottom:1px solid var(--bdr)}
+.fq{width:100%;background:none;border:none;padding:18px 0;display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;text-align:left;color:var(--white);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;transition:color .2s}
+.fq:hover{color:var(--ol)}
+.fchev{flex-shrink:0;width:20px;height:20px;border:1.5px solid var(--gray);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;transition:transform .3s,border-color .2s;color:var(--gray)}
+.fitem.open .fchev{transform:rotate(45deg);border-color:var(--orange);color:var(--orange)}
+.fa{font-size:14px;color:var(--cd);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1),padding .3s}
+.fitem.open .fa{max-height:260px;padding-bottom:18px}
+
+/* ── ENROLL ── */
+.enroll-sec{background:linear-gradient(180deg,var(--black) 0%,#0D0B07 100%);border-top:2px solid var(--odim)}
+.elay{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+@media(max-width:680px){.elay{grid-template-columns:1fr;gap:40px}}
+.el h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7vw,74px);line-height:.92;color:var(--white);margin-bottom:22px}
+.el h2 .acc{color:var(--orange)}
+.erow{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--bdr);font-size:14px;color:var(--cd)}
+.erow:last-child{border-bottom:none}
+.erow .ei{font-size:17px;flex-shrink:0;margin-top:2px}
+.erow strong{color:var(--white)}
+.pbox{margin-top:28px;padding:22px;background:rgba(212,70,15,.07);border:1px solid rgba(212,70,15,.28);border-radius:6px}
+.pbl{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.pbmain{display:flex;align-items:baseline;gap:10px}
+.pbcur{font-size:20px;color:var(--ol)}
+.pbnum{font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--ol);line-height:1}
+.pbwas{font-size:13px;color:var(--gray);margin-top:4px}
+.pbwas span{text-decoration:line-through}
+.sbadge{margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(212,70,15,.14);border:1px solid rgba(212,70,15,.28);padding:5px 12px;border-radius:100px;font-size:12px;color:var(--ol);font-weight:600}
+
+/* ── FORM CARD ── */
+.fcard{background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden}
+.fhead{padding:18px 22px;background:var(--gd);border-bottom:1px solid #2A2720}
+.fhead h3{font-size:15px;font-weight:700;color:var(--white)}
+.fhead p{font-size:12px;color:var(--gray);margin-top:2px}
+.fbody{padding:26px 22px}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--cd);margin-bottom:7px}
+.fg label .req{color:var(--orange)}
+.fg input,.fg select,.fg textarea{width:100%;background:#161410;border:1px solid var(--bdr);border-radius:4px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--white);outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(212,70,15,.14)}
+.fg input::placeholder,.fg textarea::placeholder{color:#4A4840}
+.fg select option{background:#161410}
+.fg textarea{resize:vertical;min-height:72px}
+.frow2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:480px){.frow2{grid-template-columns:1fr}}
+.fcons{display:flex;align-items:flex-start;gap:9px;margin-bottom:18px;font-size:12px;color:var(--gray);line-height:1.55}
+.fcons input[type=checkbox]{width:15px;height:15px;flex-shrink:0;margin-top:2px;accent-color:var(--orange);cursor:pointer}
+.btn-pay{width:100%;background:var(--orange);color:var(--white);border:none;padding:17px 24px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;border-radius:4px;letter-spacing:.03em;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden}
+.btn-pay::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,.07),transparent);pointer-events:none}
+.btn-pay:hover{background:var(--ol);transform:translateY(-2px);box-shadow:0 12px 36px rgba(212,70,15,.4)}
+.btn-pay:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.rzp-hidden{display:none}
+.fsec{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:12px;font-size:12px;color:var(--gray)}
+.ferr{background:rgba(180,40,20,.1);border:1px solid rgba(212,70,15,.4);color:#FF8C70;font-size:13px;padding:10px 14px;border-radius:4px;margin-bottom:14px;display:none}
+.ferr.show{display:block}
+.fsuc{display:none;text-align:center;padding:40px 22px}
+.fsuc.show{display:block}
+.fsuc .sico{font-size:54px;margin-bottom:14px}
+.fsuc h3{font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--white);margin-bottom:12px}
+.fsuc p{font-size:14px;color:var(--cd);line-height:1.75}
+.fsuc .sname{color:var(--ol);font-weight:700}
+
+/* FOOTER */
+footer{padding:36px 24px;border-top:1px solid var(--bdr);text-align:center}
+.fbrand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.08em;color:var(--white);margin-bottom:8px}
+footer p{font-size:12px;color:var(--gray);line-height:1.8}
+footer a{color:var(--cd);text-decoration:none}
+footer a:hover{color:var(--ol)}
+
+@media(max-width:600px){
+  section{padding:60px 20px}
+  .oi{grid-template-columns:auto 1fr}
+  .oval{display:none}
+  .stotal{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- STICKY NAV -->
+<div class="sticky" id="stk">
+  <div class="si-info">
+    <strong>Content Crore Foundation Cohort — Batch 1</strong>
+    <span>🔥 30 seats only · Seats close June 1 · Starts June 7</span>
+  </div>
+  <button class="btn-stk" onclick="goToEnroll()">Enroll Now — ₹7,999 →</button>
+</div>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="hglow"></div><div class="hglow2"></div>
+  <div class="hi">
+    <div class="eyebrow"><span class="dot"></span>Batch 1 · Seats close June 1 · Starts June 7</div>
+    <p style="font-size:13px;font-weight:600;color:var(--ol);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;animation:fu .6s ease both">For Indian creators under 5,000 followers — tired of posting and getting nothing back →</p>
+    <h1 class="h1"><span class="itl">Finally</span> feel like<br>a <span class="acc">real</span> creator.</h1>
+    <p class="hsub">
+      With a content system that works, an audience that grows, and your first income from content — <strong>in 4 weeks.</strong><br><br>
+      <span style="font-size:14px;color:var(--gray)">Tushar Vakt went from 300 → 16,000 followers in 7 months. No paid ads. Now teaching the exact system — live.</span>
+    </p>
+    <div class="stats-row">
+      <div class="stat"><span class="n">300→16K</span><span class="l">In 7 months</span></div>
+      <div class="sdiv"></div>
+      <div class="stat"><span class="n">₹0</span><span class="l">Paid ads</span></div>
+      <div class="sdiv"></div>
+      <div class="stat"><span class="n">65</span><span class="l">Chapter system</span></div>
+      <div class="sdiv"></div>
+      <div class="stat"><span class="n">30</span><span class="l">Seats only</span></div>
+    </div>
+    <div style="margin-top:20px;margin-bottom:4px;animation:fu .6s .35s ease both">
+      <a href="register.html" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--cd);text-decoration:none;border-bottom:1px dashed var(--bdr);padding-bottom:2px;transition:color .2s" onmouseover="this.style.color='var(--ol)'" onmouseout="this.style.color='var(--cd)'">
+        Not ready yet? Attend the free workshop first — May 24 · 10AM IST · Free →
+      </a>
+    </div>
+    <div class="hbtns">
+      <button class="btn-main" onclick="goToEnroll()">Claim Your Seat — ₹7,999 <span class="arr">→</span></button>
+      <span class="hnote"><strong>Round 2 price: ₹9,999.</strong> This is Batch 1.</span>
+    </div>
+    <div class="seats-pill">🔥 <span id="sl1">23 of 30 seats remaining</span></div>
+  </div>
+</section>
+
+<!-- ═══════ MINI PROOF ═══════ -->
+<section style="background:var(--gd);padding:40px 24px;border-bottom:1px solid var(--bdr)">
+  <div class="si">
+    <div class="lbl" style="text-align:center;margin-bottom:24px">What People Say About Tushar</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px">
+      <div class="prcard" style="background:var(--black)">
+        <div class="stars">★★★★★</div>
+        <p class="pt">"@Tushar is a very genuine person. He personally sees the answers, he analyses, and the best part — he responds unlike other creators. Go ahead, he is a good mentor. Loving what he is doing."</p>
+        <div class="pa">Kushagra</div><div class="ph">Community member</div>
+      </div>
+      <div class="prcard" style="background:var(--black)">
+        <div class="stars">★★★★★</div>
+        <p class="pt">"@Tushar it is worth joining this community. Appreciate it."</p>
+        <div class="pa">Pari Sharma</div><div class="ph">Community member · UK</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PAIN ═══════ -->
+<section class="pain-sec">
+  <div class="si reveal">
+    <div class="lbl">The Real Problem</div>
+    <h2 class="sh">Does This Sound Like You?</h2>
+    <p style="font-size:15px;color:var(--cd);max-width:520px;margin-bottom:4px">If any of these hit — this cohort was built for you.</p>
+    <div class="pgrid">
+      <div class="pc">
+        <div class="pi">😤</div>
+        <h3>"I post consistently but nothing happens"</h3>
+        <p>No views, no growth, no traction — despite putting in the work. Yeh content ka problem nahi hai. It's a system problem. And systems can be fixed.</p>
+      </div>
+      <div class="pc">
+        <div class="pi">🤷</div>
+        <h3>"I never know what to post"</h3>
+        <p>Every week starts with a blank page. Koi content bank nahi, koi structure nahi. Without a content system, consistency is impossible — not a character flaw.</p>
+      </div>
+      <div class="pc">
+        <div class="pi">📉</div>
+        <h3>"My follower count has been stuck for months"</h3>
+        <p>Same number. Week after week. Kuch karo ya na karo — same result. This is a distribution and positioning problem. Both are solvable.</p>
+      </div>
+      <div class="pc">
+        <div class="pi">💸</div>
+        <h3>"I have no idea how to make money from content"</h3>
+        <p>Do you wait for 10K followers? Or can you start now? Koi clearly nahi bataata. Monetisation isn't a mystery — it's a sequence. And the sequence starts earlier than you think.</p>
+      </div>
+      <div class="pc">
+        <div class="pi">😰</div>
+        <h3>"I make content but I'm scared to post it"</h3>
+        <p>Content ready hai, confidence nahi. "Log kya sochenge." This isn't a creativity problem — it's a confidence and feedback problem. Both get solved when you're not working alone.</p>
+      </div>
+      <div class="pc">
+        <div class="pi">🕐</div>
+        <h3>"Content takes too much time and energy"</h3>
+        <p>No schedule, no batching, no production system — everything is reactive. Yeh time management ka problem nahi hai. It's an operations problem. One system changes everything.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ STORY ═══════ -->
+<section class="story-sec">
+  <div class="si reveal">
+    <div class="slay">
+      <div>
+        <div class="snitem">
+          <div><div class="snnum">300</div><div class="sntxt s" style="font-size:11px;color:var(--gray);margin-top:2px">Sep 19, 2025</div></div>
+          <div class="sntxt"><div class="t">The starting point</div><div class="s">Old account. No strategy. No paid ads. Bas ek decision — seriously karna hai.</div></div>
+        </div>
+        <div class="snitem">
+          <div><div class="snnum" style="color:var(--gold)">7</div><div class="sntxt s" style="font-size:11px;color:var(--gray);margin-top:2px">Months</div></div>
+          <div class="sntxt"><div class="t">System over luck</div><div class="s">No viral moment. No shortcut. One framework, applied with consistency.</div></div>
+        </div>
+        <div class="snitem">
+          <div><div class="snnum" style="color:var(--gl)">16K</div><div class="sntxt s" style="font-size:11px;color:var(--gray);margin-top:2px">May 2026</div></div>
+          <div class="sntxt"><div class="t">The result</div><div class="s">A book. A community. A proven system. Now it becomes yours.</div></div>
+        </div>
+      </div>
+      <div class="sright">
+        <h2>Yeh <em>luck</em> nahi tha.<br>Ek system tha.</h2>
+        <p>September 2025. 300 followers. Old account. I made a decision — to treat content as a mission, not a hobby.</p>
+        <p>7 months later: 16,000 followers. Zero paid ads. Zero viral luck. And a book — <strong>Content Crore</strong> — 65 chapters documenting the exact system I built and tested on my own account.</p>
+        <p>Now I'm teaching that system live. On your content. For your niche. In 4 weeks.</p>
+        <div class="squote">"Content banana ek skill hai. Content se business banana ek system hai. Woh system — ab tumhara bhi ho sakta hai."<br><br>— Tushar Vakt, @tusharvakt</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ OFFER STACK ═══════ -->
+<section class="offer-sec">
+  <div class="si reveal">
+    <div class="lbl">The Complete Stack</div>
+    <h2 class="sh">Everything You <span class="acc">Get</span></h2>
+    <div class="stack">
+      <div class="oi">
+        <div class="ico">🎯</div>
+        <div class="oc"><h3>4 Live Sessions with Tushar Vakt</h3><p>Every Sunday, June 7 – June 28. 75–90 minutes each. Google Meet. Real-time feedback on your actual content — not a recording of someone else's session.</p></div>
+        <div class="oval"><div class="vl">Value</div><div class="va">₹12,000</div></div>
+      </div>
+      <div class="oi bonus">
+        <div class="ico">⚡</div>
+        <div class="oc"><h3>The 7-Day Content Sprint Framework <span class="btag">Bonus</span></h3><p>Your exact action plan for Week 1 after the cohort. What to post, when, exactly how to write the hook. Zero guesswork — just execute from Day 1.</p></div>
+        <div class="oval"><div class="vl">Value</div><div class="va">₹3,000</div></div>
+      </div>
+      <div class="oi bonus">
+        <div class="ico">💬</div>
+        <div class="oc"><h3>Private WhatsApp Group — 4 Weeks <span class="btag">Bonus</span></h3><p>Direct access to Tushar for 4 weeks. Post your reel, get specific feedback in real time. Not a broadcast — a real conversation.</p></div>
+        <div class="oval"><div class="vl">Value</div><div class="va">₹5,000</div></div>
+      </div>
+      <div class="oi bonus">
+        <div class="ico">🎬</div>
+        <div class="oc"><h3>Lifetime Access to All Recordings <span class="btag">Bonus</span></h3><p>Every session recorded and yours forever. Rewatch it. Reference a framework 6 months later. Nothing expires.</p></div>
+        <div class="oval"><div class="vl">Value</div><div class="va">₹2,000</div></div>
+      </div>
+      <div class="oi bonus">
+        <div class="ico">📋</div>
+        <div class="oc"><h3>Content Crore Framework Library <span class="btag">Bonus</span></h3><p>Every framework from the sessions — Hook Formula, Content Pillar System, Monetisation Ladder — as permanent reference sheets.</p></div>
+        <div class="oval"><div class="vl">Value</div><div class="va">₹1,500</div></div>
+      </div>
+      <div class="oi">
+        <div class="ico">👑</div>
+        <div class="oc"><h3>Batch 1 Founding Member Status</h3><p>You are one of 30. Permanently. When this community grows to 10,000 — you were here at the start. Priority access to all future cohorts, forever.</p></div>
+        <div class="oval"><div class="vl">Value</div><div class="va">Priceless</div></div>
+      </div>
+    </div>
+    <div class="stotal">
+      <div class="stl"><strong>Total Stack Value: ₹23,500+</strong><br>You get all of this for one payment</div>
+      <div class="stp"><span class="stw">₹23,500</span><span class="stc">₹</span><span class="str">7,999</span></div>
+    </div>
+    <div style="text-align:center;margin-top:32px">
+      <button class="btn-main" onclick="goToEnroll()" style="font-size:17px;padding:20px 44px">
+        Claim Your Seat — ₹7,999 <span class="arr">→</span>
+      </button>
+      <p style="margin-top:12px;font-size:13px;color:var(--gray)"><strong style="color:var(--cd)">23 seats remaining.</strong> Round 2 price: ₹9,999.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CURRICULUM ═══════ -->
+<section class="curr-sec">
+  <div class="si reveal">
+    <div class="lbl">What You'll Learn</div>
+    <h2 class="sh">4 Sessions. <span class="acc">4 Transformations.</span></h2>
+    <p style="font-size:14px;color:var(--cd);max-width:520px;margin-bottom:8px">Pulled directly from Content Crore — the 65-chapter system Tushar built, tested, and lived.</p>
+    <div class="sgrid">
+      <div class="sc">
+        <div class="snum">Session 01</div>
+        <div class="sdate">Sunday, June 7</div>
+        <h3>The Foundation</h3>
+        <p>Niche, identity, and attention strategy. Why most creators stay stuck — and the one shift that changes everything.</p>
+        <div class="tags"><span class="tag">Niche Strategy</span><span class="tag">Content Pillars</span><span class="tag">Positioning</span><span class="tag">Identity</span></div>
+      </div>
+      <div class="sc">
+        <div class="snum">Session 02</div>
+        <div class="sdate">Sunday, June 14</div>
+        <h3>The Content System</h3>
+        <p>Hooks, storytelling, and reels that actually work. The exact formula that took Tushar from 300 to 16,000 — zero paid ads.</p>
+        <div class="tags"><span class="tag">Hook Formula</span><span class="tag">Storytelling</span><span class="tag">Retention</span><span class="tag">Reel Scripts</span></div>
+      </div>
+      <div class="sc">
+        <div class="snum">Session 03</div>
+        <div class="sdate">Sunday, June 21</div>
+        <h3>The Growth Engine</h3>
+        <p>Distribution, algorithm intelligence, and shareability architecture. Make the algorithm work for you — not against you.</p>
+        <div class="tags"><span class="tag">Algorithm</span><span class="tag">Distribution</span><span class="tag">Shareability</span><span class="tag">Authority</span></div>
+      </div>
+      <div class="sc">
+        <div class="snum">Session 04</div>
+        <div class="sdate">Sunday, June 28</div>
+        <h3>The Money System</h3>
+        <p>Monetisation, offer design, and your first ₹10,000 from content — before you hit 10K followers.</p>
+        <div class="tags"><span class="tag">Monetisation</span><span class="tag">Offer Design</span><span class="tag">First Revenue</span><span class="tag">DM Sales</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ GUARANTEE ═══════ -->
+<section class="guar-sec">
+  <div class="si reveal">
+    <div class="gbox">
+      <div class="gico">🛡️</div>
+      <h2>THE IRON GUARANTEE</h2>
+      <p class="gt">Attend all 4 sessions. Post every assignment.</p>
+      <p class="gt">Agar phir bhi June 28 tak tumhare paas a working content system nahi hai, audience grow nahi hui, aur pehla monetisation opportunity map nahi hua — <strong>main personally tumhare saath 1-on-1 kaam karunga jab tak nahi hota. No time limit.</strong></p>
+      <p class="gt">No questions. No arguments. Bas kaam.</p>
+      <p class="gt" style="font-size:13px;color:var(--gray)">Main 300 se 16,000 gaya usi system se jo main tumhe dene wala hun. Yeh meri guarantee hai.</p>
+      <div class="gsig">— Tushar Vakt · @tusharvakt</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PROOF ═══════ -->
+<section class="proof-sec">
+  <div class="si reveal">
+    <div class="lbl">Real People. Real Words.</div>
+    <h2 class="sh">They Said It. <span class="acc">Not Us.</span></h2>
+    <div class="prgrid">
+      <div class="prcard">
+        <div class="plat">Community</div>
+        <div class="stars">★★★★★</div>
+        <p class="pt">"@Tushar is a very genuine person. He personally sees the answers, he analyses, and the best part — he responds unlike other creators. Go ahead, he is a good mentor. Loving what he is doing."</p>
+        <div class="pa">Kushagra</div><div class="ph">Community member</div>
+      </div>
+      <div class="prcard">
+        <div class="plat">Community</div>
+        <div class="stars">★★★★★</div>
+        <p class="pt">"@Tushar it is worth joining this community. Appreciate it."</p>
+        <div class="pa">Pari Sharma</div><div class="ph">Community member · UK</div>
+      </div>
+      <div class="prcard">
+        <div class="plat">Community</div>
+        <div class="stars">★★★★★</div>
+        <p class="pt">"Man this was very informative and helpful."</p>
+        <div class="pa">Prathamesh</div><div class="ph">Community member</div>
+      </div>
+      <div class="prcard">
+        <div class="plat">Community</div>
+        <div class="stars">★★★★★</div>
+        <p class="pt">"I'm so sorry I missed this, but it was really helping. Thank you so much."</p>
+        <div class="pa">Rishon Sam</div><div class="ph">Community member</div>
+      </div>
+      <div class="prcard">
+        <div class="plat">Community</div>
+        <div class="stars">★★★★★</div>
+        <p class="pt">"Thank you so much for this suggestion. Really really thank you. We will sure implement this in our upcoming reels."</p>
+        <div class="pa">Rg_Vlogsss</div><div class="ph">Community member</div>
+      </div>
+      <div class="prcard">
+        <div class="plat">Community</div>
+        <div class="stars">★★★★★</div>
+        <p class="pt">"I really appreciate your words. Will implement this for sure."</p>
+        <div class="pa">Utkarsh Dwivedi</div><div class="ph">Community member</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FAQ ═══════ -->
+<section class="faq-sec">
+  <div class="si reveal">
+    <div class="lbl">Common Questions</div>
+    <h2 class="sh">You Asked. <span class="acc">Answered.</span></h2>
+    <div class="flist">
+      <div class="fitem">
+        <button class="fq" onclick="tfaq(this)">Do I need prior content creation experience?<div class="fchev">+</div></button>
+        <div class="fa">None required. This cohort is for creators under 5,000 followers who are stuck or just starting. Session 1 begins at the absolute foundation — niche, identity, positioning. If you have been creating for years with no results, this is also for you.</div>
+      </div>
+      <div class="fitem">
+        <button class="fq" onclick="tfaq(this)">When are the sessions and what platform?<div class="fchev">+</div></button>
+        <div class="fa">Session 1: Sunday June 7 · Session 2: Sunday June 14 · Session 3: Sunday June 21 · Session 4: Sunday June 28. All on Google Meet — one click, no downloads needed. Exact time confirmed in the WhatsApp group 48 hours before Session 1.</div>
+      </div>
+      <div class="fitem">
+        <button class="fq" onclick="tfaq(this)">What if I miss a session?<div class="fchev">+</div></button>
+        <div class="fa">All sessions are recorded — lifetime access is included. But the real value is in live feedback and real-time interaction. Attending live is strongly recommended. Note: the guarantee only applies if all 4 sessions are attended.</div>
+      </div>
+      <div class="fitem">
+        <button class="fq" onclick="tfaq(this)">What is the refund policy?<div class="fchev">+</div></button>
+        <div class="fa">No refunds — but the Iron Guarantee applies. Attend all 4 sessions, post all assignments, and if by June 28 you don't have a working content system, a growing audience, and a clear monetisation path — Tushar personally works with you 1-on-1 until you do. No time limit. That commitment is worth more than a refund.</div>
+      </div>
+      <div class="fitem">
+        <button class="fq" onclick="tfaq(this)">Why only 30 seats?<div class="fchev">+</div></button>
+        <div class="fa">Because Tushar personally reviews content from cohort members in every session. Beyond 30, the quality of individual feedback drops. This cohort is not built for scale — it's built for transformation. When it's full, it's full.</div>
+      </div>
+      <div class="fitem">
+        <button class="fq" onclick="tfaq(this)">Is this only for Indian creators?<div class="fchev">+</div></button>
+        <div class="fa">Not at all. The Content Crore system applies to any creator building a personal brand — regardless of location. Sessions are conducted in English (Hinglish). Global creators are welcome. The frameworks work across Instagram, YouTube, and LinkedIn.</div>
+      </div>
+      <div class="fitem">
+        <button class="fq" onclick="tfaq(this)">Is the payment secure?<div class="fchev">+</div></button>
+        <div class="fa">Yes. Payment is processed by Razorpay — fully SSL encrypted. UPI, debit/credit cards, and net banking all accepted. After successful payment, Tushar personally adds you to the WhatsApp group within 24 hours.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ENROLL ═══════ -->
+<section class="enroll-sec" id="enroll">
+  <div class="si">
+    <div class="elay">
+
+      <!-- LEFT -->
+      <div class="el reveal">
+        <div class="lbl">Enroll Now</div>
+        <h2>Claim Your<br><span class="acc">Seat.</span></h2>
+        <div style="margin-top:8px">
+          <div class="erow"><span class="ei">📅</span><span><strong>Seats close:</strong> Monday, June 1, 2026</span></div>
+          <div class="erow"><span class="ei">🚀</span><span><strong>Session 1:</strong> Sunday, June 7 — Google Meet</span></div>
+          <div class="erow"><span class="ei">🗓️</span><span><strong>All 4 sessions:</strong> June 7 · June 14 · June 21 · June 28</span></div>
+          <div class="erow"><span class="ei">👥</span><span><strong>Batch size:</strong> 30 seats maximum. No exceptions.</span></div>
+          <div class="erow"><span class="ei">🛡️</span><span><strong>Guarantee:</strong> Working system + growing audience + monetisation path — or 1-on-1 with Tushar until you get it.</span></div>
+          <div class="erow"><span class="ei">📱</span><span><strong>After payment:</strong> Tushar personally adds you to WhatsApp group within 24 hours.</span></div>
+        </div>
+        <div class="pbox">
+          <div class="pbl">Your Investment</div>
+          <div class="pbmain"><span class="pbcur">₹</span><span class="pbnum">7,999</span></div>
+          <div class="pbwas">Round 2 price: <span>₹9,999</span> — price increases after Batch 1 fills</div>
+          <div class="sbadge">🔥 <span id="sl2">23 seats remaining</span></div>
+        </div>
+      </div>
+
+      <!-- RIGHT — FORM -->
+      <div class="fcard reveal" id="formcard">
+        <div class="fhead">
+          <h3>Reserve Your Seat</h3>
+          <p>Fill your details — payment opens in the next step</p>
+        </div>
+
+        <div style="padding:14px 22px;border-bottom:1px solid var(--bdr);background:rgba(212,70,15,.04)">
+        <p style="font-size:13px;color:var(--cd);line-height:1.6;font-style:italic">"He responds unlike other creators. Go ahead — he is a good mentor."</p>
+        <p style="font-size:11px;color:var(--gray);margin-top:5px;font-weight:700">— Kushagra · Community member</p>
+      </div>
+      <div id="formwrap">
+          <div class="fbody">
+            <div class="ferr" id="ferr"></div>
+
+            <div class="frow2">
+              <div class="fg">
+                <label>Full Name <span class="req">*</span></label>
+                <input type="text" id="fn" placeholder="Your full name" autocomplete="name">
+              </div>
+              <div class="fg">
+                <label>Instagram Handle <span class="req">*</span></label>
+                <input type="text" id="fi" placeholder="@yourusername">
+              </div>
+            </div>
+
+            <div class="fg">
+              <label>WhatsApp Number <span class="req">*</span></label>
+              <input type="tel" id="fp" placeholder="+91 98765 43210" autocomplete="tel">
+            </div>
+
+            <div class="fg">
+              <label>Email Address <span class="req">*</span></label>
+              <input type="email" id="fe" placeholder="you@example.com" autocomplete="email">
+            </div>
+
+            <div class="fg">
+              <label>Current Follower Count</label>
+              <select id="ff">
+                <option value="">Select range</option>
+                <option value="0-500">0 – 500</option>
+                <option value="500-2000">500 – 2,000</option>
+                <option value="2000-5000">2,000 – 5,000</option>
+                <option value="5000+">5,000+</option>
+              </select>
+            </div>
+
+            <div class="fg">
+              <label>Your Biggest Content Struggle</label>
+              <textarea id="fs" placeholder="What's the #1 thing holding you back right now?"></textarea>
+            </div>
+
+            <div class="fcons">
+              <input type="checkbox" id="fc">
+              <label for="fc" style="font-weight:400;text-transform:none;letter-spacing:0;font-size:12px;color:var(--gray);margin-bottom:0">
+                I understand: 30 seats only, starts June 7, guarantee requires attending all 4 sessions and completing assignments.
+              </label>
+            </div>
+
+            <div style="background:rgba(212,70,15,.08);border:1px solid rgba(212,70,15,.25);border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ol);font-weight:600">
+              🔥 <span id="urgency-txt">23 seats remaining. Once full — this price is gone forever.</span>
+            </div>
+            <div style="background:var(--gd);border:1px solid var(--bdr);border-radius:4px;padding:12px 14px;margin-bottom:14px;font-size:12px;color:var(--cd);line-height:1.7">
+              ✓ One payment. No subscription. No hidden fees.<br>
+              ✓ Miss a session? Recordings are yours forever.<br>
+              ✓ Doesn't work? Tushar works with you 1-on-1 until it does.
+            </div>
+            <button class="btn-pay" id="paybtn" onclick="handlePay(event)">
+              Yes — Reserve My Seat Now →
+            </button>
+
+            <!-- Hidden Razorpay Payment Button — triggered after validation -->
+            <div class="rzp-hidden" id="rzpdiv">
+              <form id="rzpform">
+                <script src="https://checkout.razorpay.com/v1/payment-button.js"
+                  data-payment_button_id="pl_SlNMybB3fsDAyt"
+                  data-callback_url="https://tusharvakt.github.io/thankyou.html"
+                  async></script>
+              </form>
+            </div>
+
+            <div style="text-align:center;margin-top:8px;font-size:12px;color:var(--gray)">₹7,999 · One payment · No recurring fees</div>
+            <div style="text-align:center;margin-top:10px;font-size:12px;color:var(--gray);line-height:1.6;padding:0 4px">Creators who do this with a friend get 3x better results. <a href="register.html" style="color:var(--ol);text-decoration:none">Share the free workshop →</a></div>
+            <div class="fsec">🔒 Razorpay · SSL Encrypted · UPI · Cards · Net Banking</div>
+          </div>
+        </div>
+
+        <!-- SUCCESS STATE -->
+        <div class="fsuc" id="fsuc">
+          <div class="sico">🎉</div>
+          <h3>YOU'RE IN.</h3>
+          <p>Welcome to Batch 1, <span class="sname" id="sname"></span>!<br><br>
+          Tushar will personally add you to the private WhatsApp group within <strong>24 hours</strong>.<br><br>
+          Check your WhatsApp and email. See you <strong>Sunday, June 7</strong> — come ready to work. 🔥</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PS SECTION -->
+<section style="background:var(--gd);padding:40px 24px;border-top:1px solid var(--bdr)">
+  <div class="si" style="max-width:680px">
+    <p style="font-size:15px;color:var(--cd);line-height:1.8">
+      <strong style="color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.06em">P.S.</strong>
+      &nbsp;This is Batch 1. There will never be another Batch 1. The founding price is ₹7,999. Round 2 opens at ₹9,999. The cohort starts June 7 — that is <strong style="color:var(--white)">30 seats</strong> shared between you and everyone else who sees this page. If the number above says 0 — it means those seats are gone.
+    </p>
+    <p style="font-size:15px;color:var(--cd);line-height:1.8;margin-top:14px">
+      If you are serious about your content — <a href="#enroll" onclick="goToEnroll()" style="color:var(--ol);font-weight:600;text-decoration:none">enroll now →</a>
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fbrand">TUSHAR VAKT · CONTENT CRORE</div>
+  <p>
+    <a href="https://instagram.com/tusharvakt" target="_blank">@tusharvakt</a> on Instagram · Questions? DM directly.<br>
+    Content Crore Foundation Cohort — Batch 1 · June 7 – June 28, 2026<br>
+    ₹7,999 · 30 Seats Only · Google Meet · Live with Tushar Vakt
+  </p>
+</footer>
+
+<!-- Netlify hidden form for lead capture -->
+<!-- Lead capture disabled on GitHub Pages -->
+<form name="cohort-leads" hidden style="display:none">
+  <input name="name"><input name="email"><input name="phone">
+  <input name="instagram"><input name="followers"><textarea name="struggle"></textarea>
+  <input name="payment_status"><input name="timestamp"><input name="bot-field">
+</form>
+
+<script>
+/* ── SCROLL TO ENROLL (FIX: uses getElementById + scrollIntoView, no conflict with window.scrollTo) ── */
+function goToEnroll(){
+  document.getElementById('enroll').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ── STICKY NAV ── */
+window.addEventListener('scroll',function(){
+  document.getElementById('stk').classList.toggle('show', window.pageYOffset > 500);
+});
+
+/* ── SCROLL REVEAL ── */
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); }
+  });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+
+/* ── FAQ TOGGLE ── */
+function tfaq(btn){
+  var item = btn.closest('.fitem');
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.fitem').forEach(function(i){ i.classList.remove('open'); });
+  if(!isOpen) item.classList.add('open');
+}
+
+/* ── SEATS COUNTER ── */
+var SEATS = 23;
+document.getElementById('sl1').textContent = SEATS + ' of 30 seats remaining';
+document.getElementById('sl2').textContent = SEATS + ' seats remaining';
+
+/* ── PAYMENT FLOW ── */
+function handlePay(e){
+  if(e) e.preventDefault();
+
+  var name    = document.getElementById('fn').value.trim();
+  var insta   = document.getElementById('fi').value.trim();
+  var phone   = document.getElementById('fp').value.trim();
+  var email   = document.getElementById('fe').value.trim();
+  var consent = document.getElementById('fc').checked;
+  var err     = document.getElementById('ferr');
+
+  /* Validate */
+  if(!name || !insta || !phone || !email){
+    err.textContent = 'Please fill in your Name, Instagram Handle, WhatsApp Number, and Email before proceeding.';
+    err.classList.add('show');
+    err.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  if(!consent){
+    err.textContent = 'Please tick the checkbox to confirm you understand the cohort terms.';
+    err.classList.add('show');
+    err.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  err.classList.remove('show');
+
+  var followers = document.getElementById('ff').value;
+  var struggle  = document.getElementById('fs').value.trim();
+
+  /* Store for post-payment success screen */
+  window._lead = {name:name, insta:insta, phone:phone, email:email, followers:followers, struggle:struggle};
+
+  /* 1 — Capture lead in Netlify BEFORE payment (so even non-payers are tracked) */
+  fetch('/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams({
+      'form-name':      'cohort-leads',
+      'name':           name,
+      'email':          email,
+      'phone':          phone,
+      'instagram':      insta,
+      'followers':      followers,
+      'struggle':       struggle,
+      'payment_status': 'INITIATED',
+      'timestamp':      new Date().toISOString()
+    }).toString()
+  }).catch(function(){});
+
+  /* 2 — Show loading state */
+  var btn = document.getElementById('paybtn');
+  btn.disabled = true;
+  btn.textContent = 'Opening payment...';
+
+  /* 3 — Show and click the Razorpay payment button */
+  var rzpDiv = document.getElementById('rzpdiv');
+  rzpDiv.style.display = 'block';
+
+  /* Wait for Razorpay script to load then programmatically click */
+  var attempts = 0;
+  var tryClick = setInterval(function(){
+    var rzpBtn = document.querySelector('.razorpay-payment-button');
+    if(rzpBtn){
+      clearInterval(tryClick);
+      rzpBtn.click();
+    }
+    attempts++;
+    if(attempts > 30){ /* 3 seconds max wait */
+      clearInterval(tryClick);
+      /* Fallback: make button visible for manual click */
+      rzpDiv.style.display = 'block';
+      btn.style.display = 'none';
+    }
+  }, 100);
+
+  /* Re-enable our button if user closes Razorpay popup */
+  setTimeout(function(){
+    if(btn.disabled){
+      btn.disabled = false;
+      btn.textContent = 'Yes — Reserve My Seat Now →';
+    }
+  }, 10000);
+}
+
+/* ── POST-PAYMENT SUCCESS ── */
+/* Razorpay payment button fires razorpay.payment.success event */
+document.addEventListener('razorpay.payment.success', function(e){
+  onPaymentDone((e.detail && e.detail.razorpay_payment_id) || 'rzp_success');
+});
+
+/* Also listen for postMessage from Razorpay iframe */
+window.addEventListener('message', function(e){
+  if(!e.data) return;
+  var d = e.data;
+  if(d.razorpay_payment_id || d.id || (d.status === 'success')){
+    onPaymentDone(d.razorpay_payment_id || d.id || 'rzp_paid');
+  }
+});
+
+/* Fallback: check URL params (some Razorpay configs redirect with payment_id) */
+(function checkURLParams(){
+  var p = new URLSearchParams(window.location.search);
+  if(p.get('razorpay_payment_id')){
+    onPaymentDone(p.get('razorpay_payment_id'));
+  }
+})();
+
+var _paid = false;
+function onPaymentDone(paymentId){
+  if(_paid) return;
+  _paid = true;
+
+  var d = window._lead || {};
+
+  /* Update Netlify with PAID status */
+  fetch('/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams({
+      'form-name':      'cohort-leads',
+      'name':           d.name || '',
+      'email':          d.email || '',
+      'phone':          d.phone || '',
+      'instagram':      d.insta || '',
+      'followers':      d.followers || '',
+      'struggle':       d.struggle || '',
+      'payment_status': 'PAID — ' + paymentId,
+      'timestamp':      new Date().toISOString()
+    }).toString()
+  }).catch(function(){});
+
+  /* Show success state */
+  document.getElementById('formwrap').style.display = 'none';
+  var suc = document.getElementById('fsuc');
+  suc.classList.add('show');
+  document.getElementById('sname').textContent = (d.name || 'Creator').split(' ')[0];
+  suc.scrollIntoView({behavior:'smooth', block:'center'});
+
+  /* Update seats counter */
+  SEATS = Math.max(0, SEATS - 1);
+  document.getElementById('sl1').textContent = SEATS + ' of 30 seats remaining';
+  document.getElementById('sl2').textContent = SEATS + ' seats remaining';
+}
+</script>
+
+</body>
+</html>

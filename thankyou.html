@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're In — Content Crore Foundation Cohort Batch 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0A0905;--white:#F5F0E8;--orange:#D4460F;--ol:#FF6B35;
+  --odim:#7A2808;--cream:#EDE8DE;--cd:#C8C3B9;--gray:#7A756D;
+  --gd:#2A2720;--green:#1A5C3A;--gl:#2A8A58;--gold:#C9900C;
+  --card:#0F0D08;--bdr:#3A3730;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;line-height:1.6;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.5}
+
+/* orange top bar */
+.top-bar{background:var(--orange);padding:12px 24px;text-align:center}
+.top-bar p{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.1em;color:var(--white)}
+
+/* hero */
+.hero{min-height:90vh;display:flex;align-items:center;justify-content:center;padding:80px 24px;position:relative;overflow:hidden}
+.hglow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(212,70,15,.08) 0%,transparent 65%);pointer-events:none}
+.hglow2{position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(42,138,88,.06) 0%,transparent 65%);pointer-events:none}
+
+.inner{max-width:680px;margin:0 auto;position:relative;z-index:1;text-align:center}
+
+/* confetti emoji */
+.emoji{font-size:64px;margin-bottom:24px;display:block;animation:pop .6s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+
+/* headline */
+.h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,10vw,96px);line-height:.9;letter-spacing:.01em;color:var(--white);margin-bottom:16px;animation:fu .7s .1s ease both}
+.h1 .acc{color:var(--orange)}
+.h1 .itl{font-family:'DM Serif Display',serif;font-style:italic}
+
+.sub{font-size:clamp(15px,2vw,18px);color:var(--cd);line-height:1.7;margin-bottom:40px;animation:fu .7s .2s ease both}
+.sub strong{color:var(--white)}
+
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* steps card */
+.steps-card{background:var(--gd);border:1px solid var(--bdr);border-radius:8px;padding:32px;margin-bottom:28px;text-align:left;animation:fu .7s .3s ease both}
+.steps-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:20px}
+.step{display:flex;align-items:flex-start;gap:16px;padding:14px 0;border-bottom:1px solid var(--bdr)}
+.step:last-child{border-bottom:none}
+.step-num{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;color:var(--orange);min-width:32px}
+.step-body .t{font-size:15px;font-weight:700;color:var(--white);margin-bottom:3px}
+.step-body .s{font-size:13px;color:var(--gray);line-height:1.55}
+.step-body .s strong{color:var(--cd)}
+
+/* WhatsApp CTA */
+.btn-wa{display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366;color:var(--white);border:none;padding:18px 28px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;border-radius:4px;text-decoration:none;transition:all .2s;width:100%;margin-bottom:12px;animation:fu .7s .4s ease both;position:relative;overflow:hidden}
+.btn-wa::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,.08),transparent);pointer-events:none}
+.btn-wa:hover{background:#20B858;transform:translateY(-2px);box-shadow:0 12px 36px rgba(37,211,102,.35)}
+.btn-wa .arr{transition:transform .2s}
+.btn-wa:hover .arr{transform:translateX(4px)}
+
+/* Instagram CTA */
+.btn-ig{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--gd);color:var(--white);border:1px solid var(--bdr);padding:14px 28px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border-radius:4px;text-decoration:none;transition:all .2s;width:100%;margin-bottom:28px;animation:fu .7s .45s ease both}
+.btn-ig:hover{border-color:var(--ol);color:var(--ol)}
+
+/* framework teaser */
+.framework{background:var(--card);border:1px solid var(--bdr);border-left:3px solid var(--orange);border-radius:4px;padding:24px 28px;margin-bottom:28px;text-align:left;animation:fu .7s .5s ease both}
+.fw-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:12px}
+.fw-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--white);margin-bottom:10px;line-height:1.25}
+.fw-body{font-size:14px;color:var(--cd);line-height:1.75}
+.fw-body strong{color:var(--white)}
+
+/* session dates */
+.sessions{background:rgba(212,70,15,.06);border:1px solid rgba(212,70,15,.2);border-radius:4px;padding:20px 24px;margin-bottom:28px;animation:fu .7s .55s ease both}
+.sess-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:14px}
+.sess-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bdr);font-size:14px}
+.sess-row:last-child{border-bottom:none}
+.sess-row .sn{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.1em;color:var(--gray)}
+.sess-row .sd{color:var(--white);font-weight:600}
+.sess-row .st{font-size:12px;color:var(--ol)}
+
+/* share section */
+.share-box{background:var(--gd);border:1px solid var(--bdr);border-radius:8px;padding:24px;margin-bottom:28px;animation:fu .7s .6s ease both}
+.share-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:10px}
+.share-text{font-size:14px;color:var(--cd);margin-bottom:14px;line-height:1.6}
+.share-copy{background:var(--card);border:1px solid var(--bdr);border-radius:4px;padding:12px 14px;font-size:13px;color:var(--cd);line-height:1.6;font-family:'DM Sans',sans-serif;cursor:pointer;transition:border-color .2s;width:100%;text-align:left;margin-bottom:8px}
+.share-copy:hover{border-color:var(--orange)}
+.copy-btn{background:var(--orange);color:var(--white);border:none;padding:10px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;border-radius:4px;transition:all .2s}
+.copy-btn:hover{background:var(--ol)}
+.copy-done{font-size:12px;color:var(--gl);margin-left:10px;display:none}
+.copy-done.show{display:inline}
+
+/* footer */
+footer{padding:36px 24px;border-top:1px solid var(--bdr);text-align:center}
+.fbrand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.08em;color:var(--white);margin-bottom:8px}
+footer p{font-size:12px;color:var(--gray);line-height:1.8}
+footer a{color:var(--cd);text-decoration:none}
+footer a:hover{color:var(--ol)}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <p>🎉 Payment Confirmed · Welcome to Content Crore Foundation Cohort — Batch 1</p>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hglow"></div>
+  <div class="hglow2"></div>
+
+  <div class="inner">
+    <span class="emoji">🎉</span>
+
+    <h1 class="h1">You're <span class="acc">In.</span><br><span class="itl">Welcome</span> to Batch 1.</h1>
+
+    <p class="sub">
+      Your seat is confirmed. Your payment is received.<br>
+      <strong>You are now one of 30 founding members of Content Crore.</strong><br>
+      Tushar will personally WhatsApp you within a few hours to confirm your spot. Watch for his message.
+    </p>
+
+    <!-- NEXT STEPS -->
+    <div class="steps-card">
+      <div class="steps-label">Your Next 3 Steps — Do These Now</div>
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <div class="t">Join the Private WhatsApp Group</div>
+          <div class="s">Click the button below. This is where Tushar shares the Google Meet link before every session, gives feedback, and answers questions personally. <strong>Join right now — do not wait.</strong></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <div class="t">Follow @tusharvakt on Instagram</div>
+          <div class="s">Tushar posts daily content tips between now and June 7. Each post is a preview of what you will learn in the cohort. <strong>Follow and turn on notifications.</strong></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <div class="t">Note the session dates in your calendar</div>
+          <div class="s">All 4 Sundays. <strong>June 7 · June 14 · June 21 · June 28.</strong> 10AM IST. Google Meet. Block them now. Attendance is what activates the Iron Guarantee.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHATSAPP CTA -->
+    <a class="btn-wa" href="https://chat.whatsapp.com/DXwDOsdavBOLfgMqRcVtUq" target="_blank">
+      📲 Join the Private WhatsApp Group Now <span class="arr">→</span>
+    </a>
+
+    <!-- INSTAGRAM CTA -->
+    <a class="btn-ig" href="https://instagram.com/tusharvakt" target="_blank">
+      📸 Follow @tusharvakt on Instagram — Daily Tips Until June 7
+    </a>
+
+    <!-- FRAMEWORK TEASER -->
+    <div class="framework">
+      <div class="fw-label">Your First Framework — Before June 7</div>
+      <div class="fw-title">Attention → Audience → Income</div>
+      <p class="fw-body">
+        Most creators try to monetise before they have an audience. Most try to build an audience before they understand attention. This is why 90% stay stuck.<br><br>
+        The Content Crore system works in one sequence only: <strong>Attention first. Audience second. Income third.</strong> Always in that order. Never reversed.<br><br>
+        When you try to reverse this sequence — you get frustrated, burnt out, and invisible. When you follow it — everything compounds.<br><br>
+        This is Secret 1 of Session 1. You now have it before everyone else.
+      </p>
+    </div>
+
+    <!-- SESSION DATES -->
+    <div class="sessions">
+      <div class="sess-label">Your 4 Sessions — Block These Now</div>
+      <div class="sess-row"><span class="sn">Session 01</span><span class="sd">The Foundation</span><span class="st">June 7 · 10AM IST</span></div>
+      <div class="sess-row"><span class="sn">Session 02</span><span class="sd">The Content System</span><span class="st">June 14 · 10AM IST</span></div>
+      <div class="sess-row"><span class="sn">Session 03</span><span class="sd">The Growth Engine</span><span class="st">June 21 · 10AM IST</span></div>
+      <div class="sess-row"><span class="sn">Session 04</span><span class="sd">The Money System</span><span class="st">June 28 · 10AM IST</span></div>
+    </div>
+
+    <!-- SHARE SECTION — Hormozi: every customer is a lead getter -->
+    <div class="share-box">
+      <div class="share-label">Know Another Creator Who Needs This?</div>
+      <p class="share-text">Creators who go through this with a friend get <strong style="color:var(--white)">3x better results</strong> — they hold each other accountable. Who is one creator in your life right now who is stuck and posting into the void? Share this link with them. Founding price closes June 1.</p>
+      <div class="share-copy" id="share-text" onclick="copyLink()">tusharvakt.github.io</div>
+      <button class="copy-btn" onclick="copyLink()">Copy Registration Link</button>
+      <span class="copy-done" id="copy-done">✓ Copied!</span>
+    </div>
+
+    <!-- IRON GUARANTEE REMINDER -->
+    <div style="background:rgba(42,138,88,.07);border:1px solid rgba(42,138,88,.25);border-radius:4px;padding:20px 24px;margin-bottom:28px;text-align:left;animation:fu .7s .65s ease both">
+      <div style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gl);font-weight:700;margin-bottom:10px">Your Iron Guarantee</div>
+      <p style="font-size:14px;color:var(--cd);line-height:1.7">Attend all 4 sessions. Post every assignment. If by June 28 you do not have a working content system, a growing audience, and a clear monetisation path — <strong style="color:var(--white)">Tushar personally works with you 1-on-1 until you do. No time limit. No questions.</strong></p>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fbrand">TUSHAR VAKT · CONTENT CRORE</div>
+  <p>
+    <a href="https://instagram.com/tusharvakt" target="_blank">@tusharvakt</a> on Instagram · Questions? DM directly.<br>
+    Content Crore Foundation Cohort — Batch 1 · June 7 – June 28, 2026<br>
+    <a href="index.html">← Back to main page</a>
+  </p>
+</footer>
+
+<script>
+function copyLink(){
+  var url = 'tusharvakt.github.io';
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(url).then(function(){
+      showCopied();
+    }).catch(function(){ fallbackCopy(url); });
+  } else {
+    fallbackCopy(url);
+  }
+}
+function fallbackCopy(text){
+  var el = document.createElement('textarea');
+  el.value = text;
+  el.style.position = 'fixed';
+  el.style.opacity = '0';
+  document.body.appendChild(el);
+  el.focus(); el.select();
+  try { document.execCommand('copy'); showCopied(); } catch(e){}
+  document.body.removeChild(el);
+}
+function showCopied(){
+  var el = document.getElementById('copy-done');
+  el.classList.add('show');
+  setTimeout(function(){ el.classList.remove('show'); }, 2500);
+}
+</script>
+
+</body>
+</html>

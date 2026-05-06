@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finally Feel Like a Real Creator — Content Crore Live Workshop · May 24</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ── EXACT SAME TOKENS AS INDEX PAGE ── */
+:root{
+  --black:#0A0905;--white:#F5F0E8;--orange:#D4460F;--ol:#FF6B35;
+  --odim:#7A2808;--cream:#EDE8DE;--cd:#C8C3B9;--gray:#7A756D;
+  --gd:#2A2720;--green:#1A5C3A;--gl:#2A8A58;--gold:#C9900C;
+  --card:#0F0D08;--bdr:#3A3730;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.5}
+
+/* ── COUNTDOWN BANNER — same as index sticky ── */
+.top-bar{background:var(--orange);padding:10px 24px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;position:relative;z-index:10}
+.tb-text{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.1em;color:var(--white)}
+.countdown{display:flex;align-items:center;gap:6px}
+.cd-unit{display:flex;flex-direction:column;align-items:center}
+.cd-num{font-family:'Bebas Neue',sans-serif;font-size:22px;line-height:1;color:var(--white);min-width:28px;text-align:center}
+.cd-label{font-size:9px;color:rgba(245,240,232,.7);letter-spacing:.1em;text-transform:uppercase}
+.cd-sep{font-family:'Bebas Neue',sans-serif;font-size:20px;color:rgba(245,240,232,.5);line-height:1}
+
+/* ── HERO — mirrors index hero exactly ── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+@media(max-width:768px){.hero{grid-template-columns:1fr}}
+.hglow{position:absolute;top:-100px;right:-200px;width:800px;height:800px;background:radial-gradient(ellipse,rgba(212,70,15,.1) 0%,transparent 65%);pointer-events:none;z-index:0}
+.hglow2{position:absolute;bottom:-200px;left:-100px;width:600px;height:600px;background:radial-gradient(ellipse,rgba(212,70,15,.05) 0%,transparent 65%);pointer-events:none;z-index:0}
+
+/* LEFT — mirrors index hero left */
+.hero-left{padding:80px 48px 80px 60px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+@media(max-width:768px){.hero-left{padding:56px 24px 40px}}
+
+/* eyebrow — exact copy from index */
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(212,70,15,.12);border:1px solid rgba(212,70,15,.35);padding:6px 14px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ol);margin-bottom:28px;animation:fu .6s ease both}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--ol);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+
+/* avatar line — exact copy from index */
+.avatar-line{font-size:13px;font-weight:600;color:var(--ol);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;animation:fu .6s ease both}
+
+/* h1 — EXACT same class and styles as index */
+.h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,100px);line-height:.9;letter-spacing:.01em;color:var(--white);animation:fu .6s .1s ease both}
+.h1 .acc{color:var(--orange)}
+.h1 .itl{font-family:'DM Serif Display',serif;font-style:italic}
+
+/* hsub — exact same as index */
+.hsub{margin-top:28px;font-size:clamp(15px,2vw,19px);color:var(--cd);max-width:560px;line-height:1.7;animation:fu .6s .2s ease both}
+.hsub strong{color:var(--white)}
+
+/* stats row — exact copy from index */
+.stats-row{margin-top:40px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;animation:fu .6s .3s ease both}
+.stat{display:flex;flex-direction:column}
+.stat .n{font-family:'Bebas Neue',sans-serif;font-size:40px;line-height:1;color:var(--ol)}
+.stat .l{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-top:2px}
+.sdiv{width:1px;height:36px;background:var(--bdr)}
+
+/* what you learn — section below stats */
+.learn-sec{margin-top:40px;animation:fu .6s .4s ease both}
+.lbl{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:16px}
+.learn-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--bdr);font-size:14px;color:var(--cd);line-height:1.55}
+.learn-item:last-child{border-bottom:none}
+.lcheck{width:22px;height:22px;border-radius:50%;background:rgba(42,138,88,.15);border:1px solid var(--gl);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gl);flex-shrink:0;margin-top:1px}
+
+/* event details */
+.event-sec{margin-top:36px;display:flex;flex-direction:column;gap:10px;animation:fu .6s .45s ease both}
+.event-row{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--cd)}
+.eico{width:32px;height:32px;border-radius:8px;background:rgba(212,70,15,.1);border:1px solid rgba(212,70,15,.22);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.event-row strong{color:var(--white)}
+
+@keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* RIGHT — form panel — mirrors index enroll right panel */
+.hero-right{background:var(--gd);display:flex;align-items:center;justify-content:center;padding:80px 56px 80px 60px;position:relative;z-index:1}
+@media(max-width:768px){.hero-right{padding:40px 24px}}
+
+/* fcard — EXACT same as index */
+.fcard{background:var(--card);border:1px solid var(--bdr);border-radius:8px;width:100%;max-width:400px;overflow:hidden;animation:fu .8s .2s ease both;box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.fhead{padding:18px 22px;background:var(--gd);border-bottom:1px solid #2A2720}
+.fhead h3{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;color:var(--white)}
+.fhead p{font-size:12px;color:var(--gray);margin-top:3px}
+.fhead .fhead-sub{font-size:11px;color:var(--ol);font-weight:600;margin-top:4px;letter-spacing:.04em}
+.fbody{padding:26px 22px}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--cd);margin-bottom:7px}
+.fg label .req{color:var(--orange)}
+.fg input{width:100%;background:#161410;border:1px solid var(--bdr);border-radius:4px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--white);outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none}
+.fg input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(212,70,15,.14)}
+.fg input::placeholder{color:#4A4840}
+
+/* promise note — same style as index consent */
+.fpromise{display:flex;align-items:flex-start;gap:8px;margin-bottom:18px;font-size:12px;color:var(--gray);line-height:1.55;padding:10px 12px;background:rgba(42,138,88,.06);border:1px solid rgba(42,138,88,.18);border-radius:4px}
+
+/* btn — exact same as index btn-pay */
+.btn-reg{width:100%;background:var(--orange);color:var(--white);border:none;padding:17px 24px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;border-radius:4px;letter-spacing:.03em;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden}
+.btn-reg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,.07),transparent);pointer-events:none}
+.btn-reg:hover{background:var(--ol);transform:translateY(-2px);box-shadow:0 12px 36px rgba(212,70,15,.4)}
+.btn-reg:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.arr{transition:transform .2s}
+.btn-reg:hover .arr{transform:translateX(4px)}
+
+/* fsec — same as index */
+.fsec{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:10px;font-size:12px;color:var(--gray)}
+
+/* error */
+.ferr{background:rgba(180,40,20,.1);border:1px solid rgba(212,70,15,.4);color:#FF8C70;font-size:13px;padding:10px 14px;border-radius:4px;margin-bottom:14px;display:none}
+.ferr.show{display:block}
+
+/* success — exact same as index fsuc */
+.fsuc{display:none;text-align:center;padding:40px 22px}
+.fsuc.show{display:block}
+.fsuc .sico{font-size:54px;margin-bottom:14px}
+.fsuc h3{font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--white);letter-spacing:.03em;margin-bottom:12px}
+.fsuc p{font-size:14px;color:var(--cd);line-height:1.75;margin-bottom:18px}
+.fsuc .sname{color:var(--ol);font-weight:700}
+.btn-wa{display:inline-flex;align-items:center;gap:9px;background:#25D366;color:var(--white);border:none;padding:14px 26px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;border-radius:4px;text-decoration:none;transition:all .2s;width:100%;justify-content:center}
+.btn-wa:hover{background:#20B858;transform:translateY(-2px)}
+.framework-box{margin-top:16px;padding:16px;background:rgba(212,70,15,.07);border:1px solid rgba(212,70,15,.2);border-radius:4px;text-align:left}
+.fb-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ol);margin-bottom:8px}
+.fb-text{font-size:13px;color:var(--cd);line-height:1.65}
+.fb-text strong{color:var(--white)}
+.btn-ig{display:inline-flex;align-items:center;gap:8px;background:var(--gd);border:1px solid var(--bdr);color:var(--white);text-decoration:none;padding:10px 18px;border-radius:4px;font-size:13px;font-weight:600;transition:all .2s;margin-top:12px;width:100%;justify-content:center}
+.btn-ig:hover{border-color:var(--ol);color:var(--ol)}
+
+/* seats badge — same as index sbadge */
+.sbadge{margin-top:6px;display:inline-flex;align-items:center;gap:6px;background:rgba(212,70,15,.14);border:1px solid rgba(212,70,15,.28);padding:4px 12px;border-radius:100px;font-size:12px;color:var(--ol);font-weight:600}
+
+/* PROOF STRIP — same pattern as index stotal */
+.proof-strip{background:var(--gd);border-top:1px solid var(--bdr);padding:28px 48px;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
+@media(max-width:600px){.proof-strip{padding:24px;gap:24px}}
+.ps-item{text-align:center}
+.ps-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--ol);line-height:1}
+.ps-label{font-size:11px;color:var(--gray);margin-top:3px;letter-spacing:.05em;text-transform:uppercase}
+.ps-div{width:1px;height:40px;background:var(--bdr)}
+@media(max-width:600px){.ps-div{display:none}}
+
+/* FOOTER — exact same as index */
+footer{padding:36px 24px;border-top:1px solid var(--bdr);text-align:center}
+.fbrand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.08em;color:var(--white);margin-bottom:8px}
+footer p{font-size:12px;color:var(--gray);line-height:1.8}
+footer a{color:var(--cd);text-decoration:none}
+footer a:hover{color:var(--ol)}
+
+@media(max-width:768px){
+  .hero-left{order:2}
+  .hero-right{order:1}
+  .sdiv{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- COUNTDOWN BANNER -->
+<div class="top-bar">
+  <span class="tb-text">🔥 Workshop Starts In</span>
+  <div class="countdown">
+    <div class="cd-unit"><span class="cd-num" id="cd-d">18</span><span class="cd-label">Days</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-h">00</span><span class="cd-label">Hrs</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-m">00</span><span class="cd-label">Min</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-s">00</span><span class="cd-label">Sec</span></div>
+  </div>
+  <span class="tb-text">· May 24 · 10AM IST</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hglow"></div>
+  <div class="hglow2"></div>
+
+  <!-- LEFT -->
+  <div class="hero-left">
+    <div class="eyebrow"><span class="dot"></span>Free Live Workshop · Tushar Vakt · @tusharvakt</div>
+    <p class="avatar-line">For Indian creators who are tired of posting and feeling invisible →</p>
+
+    <h1 class="h1"><span class="itl">Finally</span> feel like<br>a <span class="acc">real</span> creator.</h1>
+
+    <p class="hsub">
+      <strong>Even if you've been posting for months and still feel invisible.</strong><br>
+      In 4 weeks, go from stuck to a creator with a real system, a growing audience, and a clear path to your first income — live with Tushar Vakt.
+    </p>
+
+    <div class="stats-row">
+      <div class="stat"><span class="n">300→16K</span><span class="l">In 7 months</span></div>
+      <div class="sdiv"></div>
+      <div class="stat"><span class="n">₹0</span><span class="l">Paid ads</span></div>
+      <div class="sdiv"></div>
+      <div class="stat"><span class="n">FREE</span><span class="l">To attend</span></div>
+      <div class="sdiv"></div>
+      <div class="stat"><span class="n">May 24</span><span class="l">10AM IST</span></div>
+    </div>
+
+    <div class="learn-sec">
+      <div class="lbl">What You Will Learn</div>
+      <div class="learn-item">
+        <div class="lcheck">✓</div>
+        <span>Why you still feel invisible despite posting — and the one identity shift that changes everything</span>
+      </div>
+      <div class="learn-item">
+        <div class="lcheck">✓</div>
+        <span>The Content Crore Hook Formula — how to stop the scroll in the first 2 seconds</span>
+      </div>
+      <div class="learn-item">
+        <div class="lcheck">✓</div>
+        <span>How to make your first income from content — before you hit 10K followers</span>
+      </div>
+      <div class="learn-item">
+        <div class="lcheck">✓</div>
+        <span>Live feedback on your actual content from Tushar — bring your last 3 reels</span>
+      </div>
+    </div>
+
+    <div class="event-sec">
+      <div class="event-row"><div class="eico">📅</div><span><strong>Sunday, May 24, 2026</strong> · 10:00 AM – 12:00 PM IST</span></div>
+      <div class="event-row"><div class="eico">💻</div><span><strong>Google Meet</strong> · Link sent on WhatsApp after registration</span></div>
+      <div class="event-row"><div class="eico">⏱️</div><span><strong>2 hours</strong> · Live teaching + Q&A · No recordings sold</span></div>
+    </div>
+  </div>
+
+  <!-- RIGHT — FORM -->
+  <div class="hero-right">
+    <div class="fcard">
+      <div class="fhead">
+        <h3>Content Crore Live Workshop</h3>
+        <p>Sunday May 24 · 10AM–12PM IST · Google Meet</p>
+        <div class="fhead-sub">Finally feel like a real creator — in 4 weeks. Free.</div>
+      </div>
+      <div style="padding:12px 22px;border-bottom:1px solid var(--bdr);background:rgba(212,70,15,.04)">
+        <p style="font-size:12px;color:var(--cd);line-height:1.6;font-style:italic">"Worth joining this community. Appreciate it." — Pari Sharma, UK</p>
+      </div>
+
+      <div id="formwrap">
+        <div class="fbody">
+          <div class="ferr" id="ferr"></div>
+
+          <div class="fg">
+            <label>Full Name <span class="req">*</span></label>
+            <input type="text" id="fn" placeholder="Your full name" autocomplete="name">
+          </div>
+          <div class="fg">
+            <label>WhatsApp Number <span class="req">*</span></label>
+            <input type="tel" id="fp" placeholder="+91 98765 43210" autocomplete="tel">
+          </div>
+          <div class="fg">
+            <label>Instagram Handle <span class="req">*</span></label>
+            <input type="text" id="fi" placeholder="@yourusername">
+          </div>
+
+          <div class="fpromise">
+            <span>🔒</span>
+            <span>Your details are safe. No spam ever. You'll only receive the workshop link and daily content tips from Tushar personally.</span>
+          </div>
+          <div style="background:rgba(212,70,15,.08);border:1px solid rgba(212,70,15,.22);border-radius:4px;padding:9px 12px;margin-bottom:12px;font-size:12px;color:var(--ol);font-weight:600;display:flex;align-items:center;gap:7px">
+            🔥 Tushar personally reviews content from every attendee — limited spots
+          </div>
+
+          <div style="background:rgba(212,70,15,.08);border:1px solid rgba(212,70,15,.22);border-radius:4px;padding:10px 13px;margin-bottom:14px;font-size:13px;color:var(--ol);font-weight:600">
+            🔥 Limited spots · May 22 registrations close
+          </div>
+
+          <button class="btn-reg" id="regbtn" onclick="handleRegister()">
+            Reserve My Free Spot <span class="arr">→</span>
+          </button>
+          <div class="sbadge" style="margin-top:10px">🎯 Free to attend · Google Meet · May 24</div>
+          <div class="fsec">🔒 SSL Secured · No payment required</div>
+        </div>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="fsuc" id="fsuc">
+        <div class="sico">🎉</div>
+        <h3>You're In.</h3>
+        <p>Welcome <span class="sname" id="sname"></span>!<br>Your spot is confirmed for <strong>Sunday May 24 · 10AM IST.</strong></p>
+        <a class="btn-wa" href="https://chat.whatsapp.com/KTRh4TVYMY9BaDZ6EmRa5b" target="_blank">
+          📲 Join WhatsApp Community →
+        </a>
+        <div class="framework-box">
+          <div class="fb-label">Your First Framework — Before May 24</div>
+          <p class="fb-text">Most creators fail because they chase views. The Content Crore system is built on one sequence: <strong>attention first, audience second, income third.</strong> In that exact order. Never reversed. This is Secret 1 of the workshop.</p>
+        </div>
+        <a class="btn-ig" href="https://instagram.com/tusharvakt" target="_blank">
+          📸 Follow @tusharvakt for daily content tips
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROOF STRIP — same pattern as index -->
+<div class="proof-strip">
+  <div class="ps-item"><div class="ps-num">16K+</div><div class="ps-label">Followers — organic</div></div>
+  <div class="ps-div"></div>
+  <div class="ps-item"><div class="ps-num">7</div><div class="ps-label">Months to build the system</div></div>
+  <div class="ps-div"></div>
+  <div class="ps-item"><div class="ps-num">65</div><div class="ps-label">Chapter system</div></div>
+  <div class="ps-div"></div>
+  <div class="ps-item"><div class="ps-num">₹0</div><div class="ps-label">Paid ads spent</div></div>
+  <div class="ps-div"></div>
+  <div class="ps-item"><div class="ps-num">FREE</div><div class="ps-label">To attend</div></div>
+</div>
+
+<!-- FOOTER — exact same as index -->
+<footer>
+  <div class="fbrand">TUSHAR VAKT · CONTENT CRORE</div>
+  <p>
+    <a href="https://instagram.com/tusharvakt" target="_blank">@tusharvakt</a> on Instagram · Questions? DM directly.<br>
+    Content Crore Live Workshop · Sunday May 24, 2026 · 10AM–12PM IST · Google Meet<br>
+    <a href="index.html">← Back to main page</a>
+  </p>
+</footer>
+
+<!-- Netlify form -->
+<form name="workshop-registrations" >
+  <input name="name"><input name="phone"><input name="instagram">
+  <input name="timestamp"><input name="bot-field">
+</form>
+
+<script>
+/* ── COUNTDOWN — same logic as index ── */
+function updateCountdown(){
+  var target = new Date('2026-05-24T04:30:00Z'); // 10AM IST
+  var now = new Date();
+  var diff = target - now;
+  if(diff <= 0){
+    ['cd-d','cd-h','cd-m','cd-s'].forEach(function(id){document.getElementById(id).textContent='00';});
+    return;
+  }
+  var d = Math.floor(diff/86400000);
+  var h = Math.floor((diff%86400000)/3600000);
+  var m = Math.floor((diff%3600000)/60000);
+  var s = Math.floor((diff%60000)/1000);
+  document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+/* ── REGISTER — same pattern as index handlePay ── */
+function handleRegister(){
+  var name  = document.getElementById('fn').value.trim();
+  var phone = document.getElementById('fp').value.trim();
+  var insta = document.getElementById('fi').value.trim();
+  var err   = document.getElementById('ferr');
+
+  if(!name || !phone || !insta){
+    err.textContent = 'Please fill in your Name, WhatsApp Number, and Instagram Handle.';
+    err.classList.add('show');
+    err.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  err.classList.remove('show');
+
+  var btn = document.getElementById('regbtn');
+  btn.disabled = true;
+  btn.textContent = 'Registering...';
+
+  fetch('/',{
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body: new URLSearchParams({
+      'form-name':'workshop-registrations',
+      'name': name,
+      'phone': phone,
+      'instagram': insta,
+      'timestamp': new Date().toISOString()
+    }).toString()
+  })
+  .then(function(){ showSuccess(name); })
+  .catch(function(){ showSuccess(name); });
+}
+
+function showSuccess(name){
+  document.getElementById('formwrap').style.display = 'none';
+  var s = document.getElementById('fsuc');
+  s.classList.add('show');
+  document.getElementById('sname').textContent = name.split(' ')[0];
+  s.scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+</body>
+</html>
