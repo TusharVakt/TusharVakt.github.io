@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You Missed It — But The Replay Is Here · Content Crore Workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0A0905;--white:#F5F0E8;--orange:#D4460F;--ol:#FF6B35;
+  --cream:#EDE8DE;--cd:#C8C3B9;--gray:#7A756D;
+  --gd:#151210;--card:#111009;--bdr:#2A2720;--bdr2:#3A3730;
+  --green:#1A5C3A;--gl:#2A8A58;--gold:#C9900C;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.5}
+
+/* TOP BAR */
+.top-bar{background:var(--orange);padding:10px 24px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.tb-text{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.1em;color:var(--white)}
+.tb-timer{display:flex;align-items:center;gap:5px}
+.tb-unit{display:flex;flex-direction:column;align-items:center}
+.tb-n{font-family:'Bebas Neue',sans-serif;font-size:20px;line-height:1;color:var(--white)}
+.tb-l{font-size:8px;color:rgba(245,240,232,.7);letter-spacing:.08em;text-transform:uppercase}
+.tb-sep{font-family:'Bebas Neue',sans-serif;font-size:18px;color:rgba(245,240,232,.5)}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0;position:relative;overflow:hidden}
+@media(max-width:768px){.hero{grid-template-columns:1fr}}
+.hglow{position:absolute;top:-100px;right:-200px;width:800px;height:800px;background:radial-gradient(ellipse,rgba(212,70,15,.1) 0%,transparent 65%);pointer-events:none}
+.hglow2{position:absolute;bottom:-200px;left:-100px;width:600px;height:600px;background:radial-gradient(ellipse,rgba(212,70,15,.05) 0%,transparent 65%);pointer-events:none}
+
+.hero-left{padding:80px 60px 80px 60px;position:relative;z-index:1}
+@media(max-width:768px){.hero-left{padding:56px 24px 40px}}
+
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(212,70,15,.12);border:1px solid rgba(212,70,15,.35);padding:5px 14px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ol);margin-bottom:24px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--ol);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.6)}}
+
+.h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,7.5vw,96px);line-height:.9;letter-spacing:.01em;color:var(--white);margin-bottom:20px}
+.h1 .acc{color:var(--orange)}
+.h1 .itl{font-family:'DM Serif Display',serif;font-style:italic}
+
+.hdiv{width:48px;height:2px;background:var(--orange);margin:20px 0;border-radius:2px}
+.hsub{font-size:clamp(15px,1.9vw,18px);color:var(--cd);line-height:1.75;max-width:520px}
+.hsub strong{color:var(--white)}
+
+/* WHAT THEY MISSED */
+.missed-list{margin-top:28px;display:flex;flex-direction:column;gap:10px}
+.missed-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:rgba(255,255,255,.025);border:1px solid var(--bdr);border-radius:6px;font-size:14px;color:var(--cd);line-height:1.55}
+.mico{width:22px;height:22px;border-radius:50%;background:rgba(42,138,88,.15);border:1px solid var(--gl);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gl);flex-shrink:0;margin-top:1px}
+
+/* WARNING BADGE */
+.warning{display:flex;align-items:center;gap:10px;background:rgba(201,144,12,.07);border:1px solid rgba(201,144,12,.25);border-radius:6px;padding:12px 16px;margin-top:20px;font-size:13px;color:var(--gold);line-height:1.55}
+
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.ani{animation:fu .6s ease both}
+.ani:nth-child(1){animation-delay:.05s}
+.ani:nth-child(2){animation-delay:.12s}
+.ani:nth-child(3){animation-delay:.19s}
+.ani:nth-child(4){animation-delay:.26s}
+.ani:nth-child(5){animation-delay:.33s}
+.ani:nth-child(6){animation-delay:.40s}
+
+/* RIGHT — VIDEO PANEL */
+.hero-right{background:var(--gd);border-left:1px solid var(--bdr);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 48px;position:relative;z-index:1;min-height:100vh}
+@media(max-width:768px){.hero-right{border-left:none;border-top:1px solid var(--bdr);padding:40px 24px;min-height:auto}}
+
+/* VIDEO EMBED */
+.video-wrap{width:100%;max-width:520px;background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.video-header{padding:14px 18px;background:rgba(212,70,15,.08);border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.vh-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;color:var(--white)}
+.vh-badge{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);background:rgba(212,70,15,.12);border:1px solid rgba(212,70,15,.3);padding:3px 8px;border-radius:4px}
+.video-placeholder{width:100%;aspect-ratio:16/9;background:#0A0905;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer}
+.vp-bg{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(212,70,15,.08) 0%,transparent 65%)}
+.play-btn{width:68px;height:68px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;position:relative;z-index:1;transition:all .2s;box-shadow:0 0 0 0 rgba(212,70,15,.4)}
+.play-btn:hover{background:var(--ol);transform:scale(1.06);box-shadow:0 0 0 16px rgba(212,70,15,.1)}
+.play-arrow{width:0;height:0;border-top:14px solid transparent;border-bottom:14px solid transparent;border-left:22px solid var(--white);margin-left:4px}
+.vp-label{font-size:12px;color:var(--gray);margin-top:14px;position:relative;z-index:1;letter-spacing:.06em}
+.vp-duration{position:absolute;bottom:10px;right:12px;font-size:11px;color:var(--gray);background:rgba(10,9,5,.7);padding:2px 8px;border-radius:3px;z-index:1}
+
+/* PASTE URL BOX */
+.url-box{width:100%;max-width:520px;margin-top:16px;background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:16px 18px}
+.ub-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);font-weight:700;margin-bottom:8px}
+.ub-input{width:100%;background:#0A0905;border:1px solid var(--bdr);border-radius:4px;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--cd);outline:none;transition:border-color .2s}
+.ub-input:focus{border-color:var(--orange)}
+.ub-note{font-size:11px;color:var(--gray);margin-top:6px;line-height:1.5}
+
+/* DEADLINE CARD */
+.deadline-card{width:100%;max-width:520px;margin-top:14px;background:rgba(212,70,15,.06);border:1px solid rgba(212,70,15,.22);border-radius:8px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dc-left{font-size:13px;color:var(--cd);line-height:1.6}
+.dc-left strong{color:var(--white);display:block;font-size:15px;margin-bottom:2px}
+.dc-price{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--ol);line-height:1;text-align:right;flex-shrink:0}
+.dc-price span{display:block;font-family:'DM Sans',sans-serif;font-size:11px;color:var(--gray);letter-spacing:.06em;text-transform:uppercase}
+
+/* CTA BUTTON */
+.btn-main{width:100%;max-width:520px;background:var(--orange);color:var(--white);border:none;padding:18px 28px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;border-radius:4px;letter-spacing:.03em;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;margin-top:14px;position:relative;overflow:hidden}
+.btn-main::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,.07),transparent);pointer-events:none}
+.btn-main:hover{background:var(--ol);transform:translateY(-2px);box-shadow:0 12px 36px rgba(212,70,15,.4)}
+.arr{transition:transform .2s}
+.btn-main:hover .arr{transform:translateX(4px)}
+
+.btn-secondary{width:100%;max-width:520px;background:var(--gd);color:var(--white);border:1px solid var(--bdr);padding:13px 24px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border-radius:4px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;margin-top:10px}
+.btn-secondary:hover{border-color:var(--ol);color:var(--ol)}
+
+/* WHAT SECTION */
+.section{padding:80px 24px;position:relative}
+.si{max-width:960px;margin:0 auto}
+.sec-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:16px}
+.sec-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,60px);color:var(--white);line-height:.95;margin-bottom:28px}
+
+/* TIMESTAMPS */
+.ts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.ts-card{background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:18px 20px;display:flex;align-items:flex-start;gap:14px}
+.ts-time{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--orange);min-width:60px;line-height:1.2}
+.ts-title{font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px}
+.ts-desc{font-size:12px;color:var(--gray);line-height:1.55}
+
+/* GUARANTEE */
+.guar-sec{background:var(--gd);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);padding:60px 24px}
+.guar-inner{max-width:760px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start}
+@media(max-width:600px){.guar-inner{grid-template-columns:1fr}}
+.guar-ico{font-size:56px;line-height:1}
+.guar-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gl);font-weight:700;margin-bottom:12px}
+.guar-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,48px);color:var(--white);margin-bottom:14px;line-height:.95}
+.guar-p{font-size:15px;color:var(--cd);line-height:1.8}
+.guar-p strong{color:var(--white)}
+
+/* COHORT SECTION */
+.cohort-sec{padding:80px 24px;background:var(--black)}
+.cohort-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:960px;margin:0 auto}
+@media(max-width:700px){.cohort-grid{grid-template-columns:1fr}}
+
+/* SESSION DATES */
+.sess-card{background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden}
+.sess-head{padding:12px 20px;background:rgba(212,70,15,.06);border-bottom:1px solid var(--bdr);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);font-weight:700}
+.sess-row{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--bdr);font-size:14px}
+.sess-row:last-child{border-bottom:none}
+.sr-n{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.1em;color:var(--gray)}
+.sr-t{color:var(--white);font-weight:600}
+.sr-d{font-size:12px;color:var(--ol)}
+
+/* FAQ */
+.faq-sec{padding:80px 24px;background:var(--gd);border-top:1px solid var(--bdr)}
+.faq-grid{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:2px}
+.faq-item{background:var(--card);border:1px solid var(--bdr);border-radius:6px;overflow:hidden}
+.faq-q{padding:16px 20px;font-size:14px;font-weight:700;color:var(--white);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none}
+.faq-q:hover{color:var(--ol)}
+.faq-icon{font-size:18px;color:var(--orange);transition:transform .25s;flex-shrink:0}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;font-size:13px;color:var(--cd);line-height:1.7;padding:0 20px}
+.faq-item.open .faq-a{max-height:200px;padding:0 20px 16px}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+
+/* FOOTER */
+footer{padding:40px 24px;border-top:1px solid var(--bdr);text-align:center}
+.fbrand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.08em;color:var(--white);margin-bottom:8px}
+footer p{font-size:12px;color:var(--gray);line-height:1.8}
+footer a{color:var(--cd);text-decoration:none}
+footer a:hover{color:var(--ol)}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR — COUNTDOWN TO JUNE 1 -->
+<div class="top-bar">
+  <span class="tb-text">⚡ Replay Access + Cohort Seats Close In</span>
+  <div class="tb-timer">
+    <div class="tb-unit"><span class="tb-n" id="cd-d">08</span><span class="tb-l">Days</span></div>
+    <span class="tb-sep">:</span>
+    <div class="tb-unit"><span class="tb-n" id="cd-h">00</span><span class="tb-l">Hrs</span></div>
+    <span class="tb-sep">:</span>
+    <div class="tb-unit"><span class="tb-n" id="cd-m">00</span><span class="tb-l">Min</span></div>
+    <span class="tb-sep">:</span>
+    <div class="tb-unit"><span class="tb-n" id="cd-s">00</span><span class="tb-l">Sec</span></div>
+  </div>
+  <span class="tb-text">· June 1 Midnight</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hglow"></div>
+  <div class="hglow2"></div>
+
+  <!-- LEFT -->
+  <div class="hero-left">
+    <div class="eyebrow ani"><span class="dot"></span>Workshop Replay · May 24, 2026</div>
+    <h1 class="h1 ani">You Missed<br>the <span class="itl">Live.</span><br>Watch the<br><span class="acc">Replay.</span></h1>
+    <div class="hdiv ani"></div>
+    <p class="hsub ani">
+      <strong>2 hours. The complete Content Crore system.</strong><br>
+      Hook formula. Niche clarity. First income path. All of it — recorded and available until June 1.
+    </p>
+
+    <div class="missed-list ani">
+      <div class="missed-item"><div class="mico">✓</div><span><strong style="color:var(--white)">Secret 1</strong> — The Hook Formula that stops the scroll in 2 seconds</span></div>
+      <div class="missed-item"><div class="mico">✓</div><span><strong style="color:var(--white)">Secret 2</strong> — Niche Clarity System — your asymmetric advantage in one sentence</span></div>
+      <div class="missed-item"><div class="mico">✓</div><span><strong style="color:var(--white)">Secret 3</strong> — First Income Path — without 10K followers</span></div>
+      <div class="missed-item"><div class="mico">✓</div><span><strong style="color:var(--white)">Live content feedback</strong> — real reels reviewed on camera by Tushar</span></div>
+    </div>
+
+    <div class="warning ani">
+      <span style="font-size:18px">⚠️</span>
+      <span>Replay access closes June 1 midnight. After that — this recording is gone. The cohort is gone. Founding price is gone.</span>
+    </div>
+  </div>
+
+  <!-- RIGHT — VIDEO + CTA -->
+  <div class="hero-right">
+
+    <!-- VIDEO EMBED -->
+    <div class="video-wrap ani">
+      <div class="video-header">
+        <div class="vh-title">Content Crore Live Workshop · May 24</div>
+        <div class="vh-badge">Full Replay</div>
+      </div>
+      <div class="video-placeholder" id="videoArea">
+        <div class="vp-bg"></div>
+        <div class="play-btn" onclick="loadVideo()">
+          <div class="play-arrow"></div>
+        </div>
+        <div class="vp-label">Click to watch the full 2-hour workshop</div>
+        <div class="vp-duration">2:00:00</div>
+      </div>
+    </div>
+
+    <!-- PASTE VIDEO URL — for Tushar to update after workshop -->
+    <div class="url-box ani">
+      <div class="ub-label">🎬 Replay Video — Paste Your URL Below</div>
+      <input type="text" class="ub-input" id="videoUrl" placeholder="Paste YouTube or Google Drive video link here..." oninput="updateVideoLink()">
+      <div class="ub-note">After the workshop, paste your recording URL here and redeploy. Supports YouTube, Vimeo, Google Drive.</div>
+    </div>
+
+    <!-- DEADLINE + PRICE -->
+    <div class="deadline-card ani">
+      <div class="dc-left">
+        <strong>Cohort seats close June 1</strong>
+        Founding price — Batch 1 only.<br>
+        Round 2 opens at ₹9,999.
+      </div>
+      <div class="dc-price">₹7,999<span>One payment</span></div>
+    </div>
+
+    <!-- CTA -->
+    <a class="btn-main ani" href="https://rzp.io/rzp/cohortbatch1payment" target="_blank">
+      Join the Cohort — ₹7,999 <span class="arr">→</span>
+    </a>
+    <a class="btn-secondary ani" href="https://tusharvakt.github.io" target="_blank">
+      📋 See the full cohort details →
+    </a>
+
+    <div class="ani" style="margin-top:14px;font-size:12px;color:var(--gray);text-align:center;line-height:1.65">
+      🔒 Razorpay · SSL Secured · UPI · Cards · Net Banking
+    </div>
+
+  </div>
+</div>
+
+<!-- TIMESTAMPS SECTION -->
+<section class="section" style="background:var(--gd);border-top:1px solid var(--bdr)">
+  <div class="si">
+    <div class="sec-label">Workshop Breakdown</div>
+    <h2 class="sec-h">What Happens<br>In The Replay</h2>
+    <div class="ts-grid">
+      <div class="ts-card">
+        <div class="ts-time">0:00</div>
+        <div><div class="ts-title">The Open</div><div class="ts-desc">Why 90% of creators stay invisible — aur yeh galti kahan hoti hai.</div></div>
+      </div>
+      <div class="ts-card">
+        <div class="ts-time">10:00</div>
+        <div><div class="ts-title">The One Thing</div><div class="ts-desc">Attention → Audience → Income. The sequence that changes everything.</div></div>
+      </div>
+      <div class="ts-card">
+        <div class="ts-time">20:00</div>
+        <div><div class="ts-title">Secret 1 — Hook Formula</div><div class="ts-desc">3 hook types. Live examples. 1,700 vs 40,000 views — same content, different hook.</div></div>
+      </div>
+      <div class="ts-card">
+        <div class="ts-time">40:00</div>
+        <div><div class="ts-title">Secret 2 — Niche Clarity</div><div class="ts-desc">Asymmetric advantage. Find the position only you can own.</div></div>
+      </div>
+      <div class="ts-card">
+        <div class="ts-time">60:00</div>
+        <div><div class="ts-title">Secret 3 — First Income</div><div class="ts-desc">800 followers. ₹15,000/month. The offer before the audience.</div></div>
+      </div>
+      <div class="ts-card">
+        <div class="ts-time">75:00</div>
+        <div><div class="ts-title">Live Content Review</div><div class="ts-desc">Real reels. Real feedback from Tushar. On camera. Unscripted.</div></div>
+      </div>
+      <div class="ts-card">
+        <div class="ts-time">95:00</div>
+        <div><div class="ts-title">The Cohort Offer</div><div class="ts-desc">What comes next. 4 sessions. 30 seats. June 7–28.</div></div>
+      </div>
+      <div class="ts-card">
+        <div class="ts-time">110:00</div>
+        <div><div class="ts-title">Live Q&A</div><div class="ts-desc">Real questions answered. Objections handled publicly.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="guar-sec">
+  <div class="guar-inner">
+    <div class="guar-ico">🛡️</div>
+    <div>
+      <div class="guar-label">The Iron Guarantee</div>
+      <h2 class="guar-h">If It Doesn't Work —<br>I Work Until It Does.</h2>
+      <p class="guar-p">
+        Attend all 4 sessions. Post every assignment. If by June 28 you don't have a <strong>working content system, a growing audience, and a clear monetisation path</strong> — Tushar personally works with you 1-on-1 until you do.
+        <br><br>
+        <strong>No time limit. No questions. No excuses. Bas kaam.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- COHORT SECTION -->
+<section class="cohort-sec">
+  <div class="cohort-grid">
+    <div>
+      <div class="sec-label">What You Are Joining</div>
+      <h2 class="sec-h">Content Crore<br>Foundation<br><span style="color:var(--orange)">Cohort Batch 1</span></h2>
+      <p style="font-size:15px;color:var(--cd);line-height:1.75;margin-top:12px">
+        4 live Sundays. Your actual content reviewed personally by Tushar every session. The complete system — niche to hook to content bank to first income — built with you, not just taught to you.
+      </p>
+      <div style="margin-top:20px;display:flex;gap:16px;flex-wrap:wrap">
+        <div style="text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--ol)">30</div><div style="font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.08em">Seats only</div></div>
+        <div style="width:1px;background:var(--bdr)"></div>
+        <div style="text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--ol)">4</div><div style="font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.08em">Live sessions</div></div>
+        <div style="width:1px;background:var(--bdr)"></div>
+        <div style="text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--ol)">65</div><div style="font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.08em">Chapter system</div></div>
+      </div>
+      <a class="btn-main" href="https://rzp.io/rzp/cohortbatch1payment" target="_blank" style="margin-top:28px;max-width:380px">
+        Join Cohort — ₹7,999 <span class="arr">→</span>
+      </a>
+    </div>
+    <div class="sess-card">
+      <div class="sess-head">Your 4 Sessions — Block These Now</div>
+      <div class="sess-row"><span class="sr-n">Session 01</span><span class="sr-t">The Foundation</span><span class="sr-d">June 7 · 10AM</span></div>
+      <div class="sess-row"><span class="sr-n">Session 02</span><span class="sr-t">The Content System</span><span class="sr-d">June 14 · 10AM</span></div>
+      <div class="sess-row"><span class="sr-n">Session 03</span><span class="sr-t">The Growth Engine</span><span class="sr-d">June 21 · 10AM</span></div>
+      <div class="sess-row"><span class="sr-n">Session 04</span><span class="sr-t">The Money System</span><span class="sr-d">June 28 · 10AM</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-sec">
+  <div style="max-width:760px;margin:0 auto">
+    <div class="sec-label">Common Questions</div>
+    <h2 class="sec-h">You Are Probably<br>Thinking This.</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">I missed the live — will the cohort still make sense? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Yes. The replay gives you everything that was taught live. The cohort picks up from there — it goes deeper, personalises the system for your niche, and reviews your actual content every session. The live workshop was the introduction. The cohort is where the real work happens.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">₹7,999 is a lot for me right now. <span class="faq-icon">+</span></div>
+        <div class="faq-a">Compare it to 2 more years of posting without a system. Unmonetized time. Invisible feeling. That cost is much higher than ₹7,999. And there is the Iron Guarantee — attend, do the work, get the result. Or Tushar works 1-on-1 until you do. No time limit.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Will this work for my niche? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Session 1 is entirely about defining your specific niche. The system is niche-agnostic — it works for music, fitness, cooking, business, lifestyle, education. The hook formula, niche clarity framework, and income path all apply regardless of what you create about.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">I have very few followers — am I ready? <span class="faq-icon">+</span></div>
+        <div class="faq-a">This cohort is specifically designed for creators with 0–5,000 followers who are stuck. If you already have 10K+ and are consistently monetizing — this is probably not for you. If you are at the beginning or middle of that journey — this is exactly for you.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What if I miss a session? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Recordings are shared for every session. But attending live is 10x more valuable — you get real-time feedback on your content that recordings cannot replicate. Block all 4 Sundays in your calendar now.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fbrand">TUSHAR VAKT · CONTENT CRORE</div>
+  <p>
+    <a href="https://instagram.com/tusharvakt" target="_blank">@tusharvakt</a> on Instagram · Questions? DM directly.<br>
+    Content Crore Foundation Cohort — Batch 1 · June 7 – June 28, 2026<br>
+    <a href="https://tusharvakt.github.io">← Back to main page</a> · <a href="https://tusharvakt.github.io/register.html">Free Workshop →</a>
+  </p>
+</footer>
+
+<script>
+// COUNTDOWN to June 1 midnight IST = May 31 18:30 UTC
+function updateCountdown(){
+  var target = new Date('2026-06-01T18:30:00Z');
+  var now = new Date();
+  var diff = target - now;
+  if(diff <= 0){
+    ['cd-d','cd-h','cd-m','cd-s'].forEach(function(id){
+      document.getElementById(id).textContent='00';
+    });
+    return;
+  }
+  var d = Math.floor(diff/86400000);
+  var h = Math.floor((diff%86400000)/3600000);
+  var m = Math.floor((diff%3600000)/60000);
+  var s = Math.floor((diff%60000)/1000);
+  document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// VIDEO LOAD
+function loadVideo(){
+  var url = document.getElementById('videoUrl').value.trim();
+  if(!url){
+    alert('Paste the workshop recording URL in the box below the video, then click play.');
+    return;
+  }
+  var area = document.getElementById('videoArea');
+  var embedUrl = '';
+  if(url.includes('youtube.com/watch')){
+    var id = url.split('v=')[1].split('&')[0];
+    embedUrl = 'https://www.youtube.com/embed/'+id+'?autoplay=1';
+  } else if(url.includes('youtu.be/')){
+    var id = url.split('youtu.be/')[1].split('?')[0];
+    embedUrl = 'https://www.youtube.com/embed/'+id+'?autoplay=1';
+  } else if(url.includes('vimeo.com')){
+    var id = url.split('/').pop();
+    embedUrl = 'https://player.vimeo.com/video/'+id+'?autoplay=1';
+  } else {
+    embedUrl = url;
+  }
+  area.innerHTML = '<iframe width="100%" style="aspect-ratio:16/9;display:block" src="'+embedUrl+'" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+}
+
+function updateVideoLink(){
+  var url = document.getElementById('videoUrl').value.trim();
+  if(url) loadVideo();
+}
+
+// FAQ
+function toggleFaq(el){
+  var item = el.parentElement;
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(i){ i.classList.remove('open'); });
+  if(!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
