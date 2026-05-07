@@ -320,10 +320,7 @@ footer a:hover{color:var(--ol)}
 </footer>
 
 <!-- Netlify form -->
-<form name="workshop-registrations" netlify netlify-honeypot="bot-field" hidden>
-  <input name="name"><input name="phone"><input name="instagram">
-  <input name="timestamp"><input name="bot-field">
-</form>
+
 
 <script>
 /* ── COUNTDOWN — same logic as index ── */
@@ -369,36 +366,33 @@ function handleRegister(){
   // Show success immediately
   showSuccess(name);
 
-  // ── GOOGLE FORM SILENT SUBMISSION ──────────────────────────
-  // Captures lead to Google Sheets silently in background.
-  // User sees your page. You see the data in Sheets.
-  //
-  // TO ACTIVATE: Replace the 3 ENTRY IDs below with your real ones.
-  // HOW TO FIND THEM: Open your Google Form → Inspect → Network tab
-  // → Fill and submit → look for 'formResponse' → copy entry.XXXXXXX
-  //
+  // Google Form → Google Sheets via hidden iframe
   var FORM_ID     = '1FAIpQLSfiYHThVUxpAgqSCpQhuu9tSAzZ1MQ5ObwEoMYpaAZ0Gb_4QA';
   var ENTRY_NAME  = 'entry.1779821455';
   var ENTRY_PHONE = 'entry.1904278334';
   var ENTRY_INSTA = 'entry.1247679606';
-
-  // Method 1: Image ping (works on all browsers, no CORS issue)
-  var img = new Image();
-  img.src = 'https://docs.google.com/forms/d/e/' + FORM_ID + '/formResponse?'
-    + ENTRY_NAME  + '=' + encodeURIComponent(name)  + '&'
-    + ENTRY_PHONE + '=' + encodeURIComponent(phone) + '&'
-    + ENTRY_INSTA + '=' + encodeURIComponent(insta) + '&submit=Submit';
-
-  // Method 2: Fetch (backup)
-  fetch('https://docs.google.com/forms/d/e/' + FORM_ID + '/formResponse', {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: ENTRY_NAME  + '=' + encodeURIComponent(name)  + '&'
-        + ENTRY_PHONE + '=' + encodeURIComponent(phone) + '&'
-        + ENTRY_INSTA + '=' + encodeURIComponent(insta) + '&submit=Submit'
-  }).catch(function(){});
-  // ───────────────────────────────────────────────────────────
+  try {
+    var ifr = document.createElement('iframe');
+    ifr.name = 'gf_' + Date.now();
+    ifr.style.cssText = 'display:none;width:0;height:0;border:0;position:absolute;left:-9999px';
+    document.body.appendChild(ifr);
+    var frm = document.createElement('form');
+    frm.method = 'POST';
+    frm.action = 'https://docs.google.com/forms/d/e/' + FORM_ID + '/formResponse';
+    frm.target = ifr.name;
+    frm.style.display = 'none';
+    [[ENTRY_NAME,name],[ENTRY_PHONE,phone],[ENTRY_INSTA,insta]].forEach(function(f){
+      var inp = document.createElement('input');
+      inp.type='hidden'; inp.name=f[0]; inp.value=f[1];
+      frm.appendChild(inp);
+    });
+    document.body.appendChild(frm);
+    frm.submit();
+    setTimeout(function(){
+      try{document.body.removeChild(frm);}catch(e){}
+      try{document.body.removeChild(ifr);}catch(e){}
+    },5000);
+  } catch(e){}
 }
 
 function showSuccess(name){
