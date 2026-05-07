@@ -186,8 +186,8 @@ footer a:hover{color:var(--ol)}
     <h1 class="h1"><span class="itl">Finally</span> feel like<br>a <span class="acc">real</span> creator.</h1>
 
     <p class="hsub">
-      <strong>Even if you've been posting for months and still feel invisible.</strong><br>
-      In 4 weeks, go from stuck to a creator with a real system, a growing audience, and a clear path to your first income — live with Tushar Vakt.
+      With a content system that works, an audience that grows, and your first income from content — <strong>in 4 weeks.</strong><br><br>
+      <span style="font-size:14px;color:var(--gray)">Tushar Vakt went from 300 → 16,000 followers in 7 months. No paid ads. Now teaching the exact system — live.</span>
     </p>
 
     <div class="stats-row">
@@ -315,12 +315,12 @@ footer a:hover{color:var(--ol)}
   <p>
     <a href="https://instagram.com/tusharvakt" target="_blank">@tusharvakt</a> on Instagram · Questions? DM directly.<br>
     Content Crore Live Workshop · Sunday May 24, 2026 · 10AM–12PM IST · Google Meet<br>
-    <a href="index.html">← Back to main page</a>
+    <a href="https://contentcrorebatch1.netlify.app">← Back to main page</a>
   </p>
 </footer>
 
 <!-- Netlify form -->
-<form name="workshop-registrations" >
+<form name="workshop-registrations" netlify netlify-honeypot="bot-field" hidden>
   <input name="name"><input name="phone"><input name="instagram">
   <input name="timestamp"><input name="bot-field">
 </form>
@@ -366,19 +366,39 @@ function handleRegister(){
   btn.disabled = true;
   btn.textContent = 'Registering...';
 
-  fetch('/',{
-    method:'POST',
-    headers:{'Content-Type':'application/x-www-form-urlencoded'},
-    body: new URLSearchParams({
-      'form-name':'workshop-registrations',
-      'name': name,
-      'phone': phone,
-      'instagram': insta,
-      'timestamp': new Date().toISOString()
-    }).toString()
-  })
-  .then(function(){ showSuccess(name); })
-  .catch(function(){ showSuccess(name); });
+  // Show success immediately
+  showSuccess(name);
+
+  // ── GOOGLE FORM SILENT SUBMISSION ──────────────────────────
+  // Captures lead to Google Sheets silently in background.
+  // User sees your page. You see the data in Sheets.
+  //
+  // TO ACTIVATE: Replace the 3 ENTRY IDs below with your real ones.
+  // HOW TO FIND THEM: Open your Google Form → Inspect → Network tab
+  // → Fill and submit → look for 'formResponse' → copy entry.XXXXXXX
+  //
+  var FORM_ID     = '1FAIpQLSfiYHThVUxpAgqSCpQhuu9tSAzZ1MQ5ObwEoMYpaAZ0Gb_4QA';
+  var ENTRY_NAME  = 'entry.1779821455';
+  var ENTRY_PHONE = 'entry.1904278334';
+  var ENTRY_INSTA = 'entry.1247679606';
+
+  // Method 1: Image ping (works on all browsers, no CORS issue)
+  var img = new Image();
+  img.src = 'https://docs.google.com/forms/d/e/' + FORM_ID + '/formResponse?'
+    + ENTRY_NAME  + '=' + encodeURIComponent(name)  + '&'
+    + ENTRY_PHONE + '=' + encodeURIComponent(phone) + '&'
+    + ENTRY_INSTA + '=' + encodeURIComponent(insta) + '&submit=Submit';
+
+  // Method 2: Fetch (backup)
+  fetch('https://docs.google.com/forms/d/e/' + FORM_ID + '/formResponse', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: ENTRY_NAME  + '=' + encodeURIComponent(name)  + '&'
+        + ENTRY_PHONE + '=' + encodeURIComponent(phone) + '&'
+        + ENTRY_INSTA + '=' + encodeURIComponent(insta) + '&submit=Submit'
+  }).catch(function(){});
+  // ───────────────────────────────────────────────────────────
 }
 
 function showSuccess(name){
