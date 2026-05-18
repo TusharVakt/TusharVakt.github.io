@@ -320,7 +320,10 @@ footer a:hover{color:var(--ol)}
 </footer>
 
 <!-- Netlify form -->
-
+<form name="workshop-registrations" netlify netlify-honeypot="bot-field" hidden>
+  <input name="name"><input name="phone"><input name="instagram">
+  <input name="timestamp"><input name="bot-field">
+</form>
 
 <script>
 /* ── COUNTDOWN — same logic as index ── */
@@ -363,36 +366,46 @@ function handleRegister(){
   btn.disabled = true;
   btn.textContent = 'Registering...';
 
-  // Show success immediately
-  showSuccess(name);
+  fetch('/',{
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body: new URLSearchParams({
+      'form-name':'workshop-registrations',
+      'name': name,
+      'phone': phone,
+      'instagram': insta,
+      'timestamp': new Date().toISOString()
+    }).toString()
+  })
+  .then(function(){ showSuccess(name);
 
-  // Google Form → Google Sheets via hidden iframe
-  var FORM_ID     = '1FAIpQLSfiYHThVUxpAgqSCpQhuu9tSAzZ1MQ5ObwEoMYpaAZ0Gb_4QA';
-  var ENTRY_NAME  = 'entry.1779821455';
-  var ENTRY_PHONE = 'entry.1904278334';
-  var ENTRY_INSTA = 'entry.1247679606';
+  // ── TALLY FORM SILENT SUBMISSION → Google Sheets ──────────────
   try {
-    var ifr = document.createElement('iframe');
-    ifr.name = 'gf_' + Date.now();
-    ifr.style.cssText = 'display:none;width:0;height:0;border:0;position:absolute;left:-9999px';
-    document.body.appendChild(ifr);
-    var frm = document.createElement('form');
-    frm.method = 'POST';
-    frm.action = 'https://docs.google.com/forms/d/e/' + FORM_ID + '/formResponse';
-    frm.target = ifr.name;
-    frm.style.display = 'none';
-    [[ENTRY_NAME,name],[ENTRY_PHONE,phone],[ENTRY_INSTA,insta]].forEach(function(f){
-      var inp = document.createElement('input');
-      inp.type='hidden'; inp.name=f[0]; inp.value=f[1];
-      frm.appendChild(inp);
+    var tifr = document.createElement('iframe');
+    tifr.name = 'tally_' + Date.now();
+    tifr.style.cssText = 'display:none;width:0;height:0;border:0;position:absolute;left:-9999px';
+    document.body.appendChild(tifr);
+    var tfrm = document.createElement('form');
+    tfrm.method = 'POST';
+    tfrm.action = 'https://tally.so/r/ob5z9N';
+    tfrm.target = tifr.name;
+    tfrm.style.display = 'none';
+    [['name',name],['phone',phone],['instagram',insta],
+     ['source', new URLSearchParams(window.location.search).get('source')||'organic']
+    ].forEach(function(f){
+      var i=document.createElement('input');
+      i.type='hidden';i.name=f[0];i.value=f[1];
+      tfrm.appendChild(i);
     });
-    document.body.appendChild(frm);
-    frm.submit();
+    document.body.appendChild(tfrm);
+    tfrm.submit();
     setTimeout(function(){
-      try{document.body.removeChild(frm);}catch(e){}
-      try{document.body.removeChild(ifr);}catch(e){}
+      try{document.body.removeChild(tfrm);}catch(e){}
+      try{document.body.removeChild(tifr);}catch(e){}
     },5000);
   } catch(e){}
+  // ────────────────────────────────────────────────────────────── })
+  .catch(function(){ showSuccess(name); });
 }
 
 function showSuccess(name){
