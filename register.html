@@ -362,24 +362,10 @@ function handleRegister(){
   }
   err.classList.remove('show');
 
-  var btn = document.getElementById('regbtn');
-  btn.disabled = true;
-  btn.textContent = 'Registering...';
+  // Show success immediately — no waiting
+  showSuccess(name);
 
-  fetch('/',{
-    method:'POST',
-    headers:{'Content-Type':'application/x-www-form-urlencoded'},
-    body: new URLSearchParams({
-      'form-name':'workshop-registrations',
-      'name': name,
-      'phone': phone,
-      'instagram': insta,
-      'timestamp': new Date().toISOString()
-    }).toString()
-  })
-  .then(function(){ showSuccess(name);
-
-  // ── TALLY FORM SILENT SUBMISSION → Google Sheets ──────────────
+  // ── TALLY SILENT SUBMISSION → Google Sheets ───────────────────
   try {
     var tifr = document.createElement('iframe');
     tifr.name = 'tally_' + Date.now();
@@ -390,22 +376,21 @@ function handleRegister(){
     tfrm.action = 'https://tally.so/r/ob5z9N';
     tfrm.target = tifr.name;
     tfrm.style.display = 'none';
-    [['name',name],['phone',phone],['instagram',insta],
-     ['source', new URLSearchParams(window.location.search).get('source')||'organic']
-    ].forEach(function(f){
-      var i=document.createElement('input');
-      i.type='hidden';i.name=f[0];i.value=f[1];
+    [['name', name], ['phone', phone], ['instagram', insta],
+     ['source', new URLSearchParams(window.location.search).get('source') || 'organic']
+    ].forEach(function(f) {
+      var i = document.createElement('input');
+      i.type = 'hidden'; i.name = f[0]; i.value = f[1];
       tfrm.appendChild(i);
     });
     document.body.appendChild(tfrm);
     tfrm.submit();
-    setTimeout(function(){
-      try{document.body.removeChild(tfrm);}catch(e){}
-      try{document.body.removeChild(tifr);}catch(e){}
-    },5000);
-  } catch(e){}
-  // ────────────────────────────────────────────────────────────── })
-  .catch(function(){ showSuccess(name); });
+    setTimeout(function() {
+      try { document.body.removeChild(tfrm); } catch(e) {}
+      try { document.body.removeChild(tifr); } catch(e) {}
+    }, 5000);
+  } catch(e) {}
+  // ──────────────────────────────────────────────────────────────
 }
 
 function showSuccess(name){
