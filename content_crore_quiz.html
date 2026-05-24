@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Crore Creator Quiz — Find Your Level</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#08080A;--white:#F4F0E8;--orange:#D4460F;--ol:#FF6B35;
+  --cream:#EDE8DE;--muted:#9A958D;--border:#252320;--card:#111010;
+  --gl:#2DB87A;--gold:#C9940C;--pl:#9B59B6;--red:#C0392B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);min-height:100vh}
+
+.screen{display:none;min-height:100vh;padding:40px 24px;max-width:760px;margin:0 auto;flex-direction:column;align-items:center}
+.screen.active{display:flex;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+.pill{display:inline-flex;align-items:center;gap:7px;background:rgba(212,70,15,.12);border:1px solid rgba(212,70,15,.35);padding:5px 14px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ol);margin-bottom:20px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--ol);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.bb{font-family:'Bebas Neue',sans-serif}
+.acc{color:var(--orange)}
+.itl{font-family:'DM Serif Display',serif;font-style:italic}
+.hdiv{width:44px;height:2px;background:var(--orange);border-radius:2px;margin:14px auto}
+
+/* NAME SCREEN */
+.name-input{width:100%;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px 18px;font-family:'DM Sans',sans-serif;font-size:16px;color:var(--white);outline:none;transition:border-color .2s;margin-bottom:12px}
+.name-input:focus{border-color:var(--orange)}
+.name-input::placeholder{color:var(--muted)}
+.start-btn{width:100%;background:var(--orange);color:var(--white);border:none;padding:16px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;border-radius:8px;transition:all .2s}
+.start-btn:hover{background:var(--ol);transform:translateY(-2px)}
+.name-error{color:#FF8C70;font-size:13px;margin-bottom:10px;display:none}
+
+/* LEVEL CARDS */
+.levels-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;margin-top:28px}
+@media(max-width:500px){.levels-grid{grid-template-columns:1fr}}
+.lc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 18px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;text-align:center}
+.lc:hover{transform:translateY(-3px)}
+.lc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.lc-b::before{background:var(--gl)} .lc-b:hover{border-color:var(--gl)}
+.lc-i::before{background:var(--gold)} .lc-i:hover{border-color:var(--gold)}
+.lc-p::before{background:var(--ol)} .lc-p:hover{border-color:var(--ol)}
+.lc-a::before{background:var(--pl)} .lc-a:hover{border-color:var(--pl)}
+.lc-icon{font-size:34px;margin-bottom:8px}
+.lc-name{font-family:'Bebas Neue',sans-serif;font-size:26px;margin-bottom:4px}
+.lc-b .lc-name{color:var(--gl)} .lc-i .lc-name{color:var(--gold)} .lc-p .lc-name{color:var(--ol)} .lc-a .lc-name{color:var(--pl)}
+.lc-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.lc-tag{font-size:11px;font-weight:700;letter-spacing:.06em;padding:3px 10px;border-radius:100px;display:inline-block}
+.lc-b .lc-tag{background:rgba(45,184,122,.1);color:var(--gl);border:1px solid rgba(45,184,122,.3)}
+.lc-i .lc-tag{background:rgba(201,148,12,.1);color:var(--gold);border:1px solid rgba(201,148,12,.3)}
+.lc-p .lc-tag{background:rgba(212,70,15,.1);color:var(--ol);border:1px solid rgba(212,70,15,.3)}
+.lc-a .lc-tag{background:rgba(155,89,182,.1);color:var(--pl);border:1px solid rgba(155,89,182,.3)}
+.lc-qs{font-size:10px;color:var(--muted);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+
+/* QUIZ */
+.q-level-tag{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.1em;margin-bottom:8px;text-align:center}
+.progress-bar{width:100%;height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.progress-fill{height:100%;border-radius:3px;transition:width .4s ease}
+.progress-txt{font-size:11px;color:var(--muted);text-align:right;margin-bottom:24px}
+.q-num{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;text-align:center}
+.q-text{font-size:clamp(16px,2.4vw,20px);color:var(--white);font-weight:600;line-height:1.5;margin-bottom:22px;text-align:center}
+.opts{display:flex;flex-direction:column;gap:10px;width:100%}
+.opt{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:13px 16px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px}
+.opt:hover{border-color:var(--orange);background:rgba(212,70,15,.05);transform:translateX(3px)}
+.opt.correct{border-color:var(--gl);background:rgba(45,184,122,.07);pointer-events:none}
+.opt.wrong{border-color:var(--red);background:rgba(192,57,43,.07);pointer-events:none}
+.opt.disabled{pointer-events:none}
+.opt-letter{font-family:'Bebas Neue',sans-serif;font-size:22px;min-width:26px;color:var(--muted);line-height:1}
+.opt.correct .opt-letter{color:var(--gl)}
+.opt.wrong .opt-letter{color:#FF8C70}
+.opt-text{font-size:14px;color:var(--cream);line-height:1.5;flex:1}
+.opt-icon{margin-left:auto;font-size:16px;min-width:20px;text-align:right}
+.fb-box{width:100%;margin-top:14px;background:var(--card);border-radius:8px;padding:13px 16px;font-size:13px;line-height:1.65;display:none}
+.fb-box.show{display:block}
+.fb-c{border-left:3px solid var(--gl);color:var(--cream)}
+.fb-w{border-left:3px solid var(--red);color:var(--cream)}
+.next-btn{margin-top:18px;background:var(--orange);color:var(--white);border:none;padding:13px 32px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;border-radius:6px;transition:all .2s;display:none}
+.next-btn.show{display:inline-block}
+.next-btn:hover{background:var(--ol);transform:translateY(-2px)}
+
+/* RESULT */
+.score-wrap{position:relative;width:150px;height:150px;margin:20px auto}
+.score-svg{transform:rotate(-90deg)}
+.score-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-num{font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;color:var(--white)}
+.score-den{font-size:12px;color:var(--muted)}
+.r-badge{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.08em;padding:7px 22px;border-radius:6px;margin:10px 0;display:inline-block}
+.rb-b{background:rgba(45,184,122,.12);color:var(--gl);border:1px solid rgba(45,184,122,.3)}
+.rb-i{background:rgba(201,148,12,.12);color:var(--gold);border:1px solid rgba(201,148,12,.3)}
+.rb-p{background:rgba(212,70,15,.12);color:var(--ol);border:1px solid rgba(212,70,15,.3)}
+.rb-a{background:rgba(155,89,182,.12);color:var(--pl);border:1px solid rgba(155,89,182,.3)}
+.r-name{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(20px,4vw,30px);color:var(--cream);text-align:center;margin:4px 0}
+.r-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,6vw,56px);text-align:center;line-height:.95;margin-bottom:10px}
+.r-desc{font-size:15px;color:var(--cream);text-align:center;line-height:1.75;max-width:540px;margin-bottom:18px}
+.pitch-box{width:100%;background:rgba(212,70,15,.06);border:1px solid rgba(212,70,15,.25);border-radius:10px;padding:18px 20px;margin-bottom:16px}
+.pitch-title{font-size:10px;color:var(--ol);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.pitch-content{font-size:14px;color:var(--cream);line-height:1.75}
+.action-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px;width:100%}
+.btn-p{background:var(--orange);color:var(--white);border:none;padding:13px 24px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;border-radius:6px;transition:all .2s;text-decoration:none;display:inline-block;text-align:center}
+.btn-p:hover{background:var(--ol);transform:translateY(-2px)}
+.btn-s{background:var(--card);color:var(--white);border:1px solid var(--border);padding:13px 24px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border-radius:6px;transition:all .2s}
+.btn-s:hover{border-color:var(--ol);color:var(--ol)}
+.review-item{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:11px 14px;margin-bottom:7px;font-size:13px;line-height:1.6}
+.review-q{color:var(--muted);margin-bottom:4px;font-size:12px}
+.review-c{color:var(--gl)}
+.review-w{color:#FF8C70}
+.footer-note{font-size:11px;color:var(--muted);text-align:center;margin-top:22px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<!-- NAME SCREEN -->
+<div class="screen active" id="nameScreen">
+  <div class="pill"><span class="dot"></span>Content Crore · Creator Assessment</div>
+  <div class="bb" style="font-size:clamp(44px,9vw,86px);line-height:.9;text-align:center;margin:24px 0 12px">
+    Find Your<br><span class="acc itl">Creator</span><br>Level.
+  </div>
+  <div class="hdiv"></div>
+  <p style="font-size:15px;color:var(--cream);text-align:center;max-width:460px;line-height:1.75;margin-bottom:24px">
+    10 questions per level. Honest answers only.<br>
+    Know exactly where you are — and what to do next.
+  </p>
+  <div style="width:100%;max-width:420px">
+    <label style="font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:700;display:block;margin-bottom:8px">Your Full Name</label>
+    <input type="text" class="name-input" id="nameInput" placeholder="Type your name here..." autocomplete="name">
+    <div class="name-error" id="nameError">Please enter your name to continue.</div>
+    <button class="start-btn" id="startBtn">Start The Quiz →</button>
+  </div>
+  <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:18px;line-height:1.7">
+    Tushar Vakt · @tusharvakt · Content Crore<br>
+    <span style="font-size:11px">Take a screenshot of your result and share in the group!</span>
+  </p>
+</div>
+
+<!-- HOME / LEVEL SELECT -->
+<div class="screen" id="homeScreen">
+  <div class="pill"><span class="dot"></span>Choose Your Level</div>
+  <div class="bb" style="font-size:clamp(36px,6vw,64px);text-align:center;margin:16px 0 8px">Which Level <span class="acc">Are You?</span></div>
+  <p style="font-size:14px;color:var(--muted);text-align:center;margin-bottom:4px">Select honestly — this determines your personalised result.</p>
+  <div class="levels-grid">
+    <div class="lc lc-b" onclick="startQuiz('beginner')">
+      <div class="lc-icon">🌱</div>
+      <div class="lc-name">Beginner</div>
+      <div class="lc-desc">Abhi start kiya hai ya karna chahte ho. Content ki basics samajhna chahte ho.</div>
+      <div class="lc-tag">0 – 500 followers</div>
+      <div class="lc-qs">10 Questions</div>
+    </div>
+    <div class="lc lc-i" onclick="startQuiz('intermediate')">
+      <div class="lc-icon">📈</div>
+      <div class="lc-name">Intermediate</div>
+      <div class="lc-desc">Kuch time se post kar rahe ho. Growth hai lekin income aur consistency nahi.</div>
+      <div class="lc-tag">500 – 5K followers</div>
+      <div class="lc-qs">10 Questions</div>
+    </div>
+    <div class="lc lc-p" onclick="startQuiz('pro')">
+      <div class="lc-icon">🚀</div>
+      <div class="lc-name">Pro</div>
+      <div class="lc-desc">Actively grow kar rahe ho. Income shuru hui hai. System banana chahte ho.</div>
+      <div class="lc-tag">5K – 20K followers</div>
+      <div class="lc-qs">10 Questions</div>
+    </div>
+    <div class="lc lc-a" onclick="startQuiz('advanced')">
+      <div class="lc-icon">👑</div>
+      <div class="lc-name">Advanced</div>
+      <div class="lc-desc">Creator business chal raha hai. Scale karna chahte ho.</div>
+      <div class="lc-tag">20K+ followers</div>
+      <div class="lc-qs">10 Questions</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div class="screen" id="quizScreen">
+  <div style="width:100%;margin-bottom:20px;text-align:center">
+    <div class="q-level-tag" id="qLevelTag"></div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-txt" id="progressTxt"></div>
+  </div>
+  <div class="q-num" id="qNum"></div>
+  <div class="q-text" id="qText"></div>
+  <div class="opts" id="optsContainer"></div>
+  <div class="fb-box" id="fbBox"></div>
+  <button class="next-btn" id="nextBtn">Next Question →</button>
+</div>
+
+<!-- RESULT SCREEN -->
+<div class="screen" id="resultScreen">
+  <div class="pill" id="rPill"><span class="dot"></span>Quiz Complete</div>
+  <div class="score-wrap">
+    <svg class="score-svg" width="150" height="150" viewBox="0 0 150 150">
+      <circle cx="75" cy="75" r="65" fill="none" stroke="#252320" stroke-width="10"/>
+      <circle id="scoreArc" cx="75" cy="75" r="65" fill="none" stroke="#D4460F" stroke-width="10"
+        stroke-dasharray="408.41" stroke-dashoffset="408.41" stroke-linecap="round"
+        style="transition:stroke-dashoffset 1s ease"/>
+    </svg>
+    <div class="score-inner">
+      <div class="score-num" id="scoreNum">0</div>
+      <div class="score-den" id="scoreDen">/ 10</div>
+    </div>
+  </div>
+  <div class="r-badge" id="rBadge"></div>
+  <div class="r-name" id="rName"></div>
+  <div class="r-title" id="rTitle"></div>
+  <div class="r-desc" id="rDesc"></div>
+  <div class="pitch-box">
+    <div class="pitch-title">📣 Tushar's Personal Message For You</div>
+    <div class="pitch-content" id="pitchContent"></div>
+  </div>
+  <div class="action-btns">
+    <a class="btn-p" href="https://rzp.io/rzp/cohortbatch1payment" target="_blank">Join Cohort — ₹2,499 →</a>
+    <button class="btn-s" id="nextLevelBtn" onclick="tryNextLevel()">Try Next Level →</button>
+    <button class="btn-s" onclick="goHome()">Try Another Level</button>
+  </div>
+  <details style="width:100%;margin-top:18px">
+    <summary style="cursor:pointer;font-size:13px;color:var(--muted);text-align:center;padding:8px">View Answer Review ↓</summary>
+    <div id="reviewAnswers" style="margin-top:10px"></div>
+  </details>
+  <p class="footer-note">Content Crore Foundation Cohort — Batch 1<br>June 7, 14, 21, 28 · 10AM IST · @tusharvakt</p>
+</div>
+
+<script>
+var QD = {
+  beginner:{
+    name:'Beginner',color:'#2DB87A',
+    qs:[
+      {q:"Instagram pe content post karte waqt sabse pehle kya sochna chahiye?",
+       o:["Yeh content kaun dekhega aur unhe kya value milegi","Kitne hashtags lagaun","Kaunsa filter lagaun","Caption mein emoji use karun ya nahi"],
+       c:0,f:"Sahi! Content ki shuruat hamesha audience se hoti hai. Unka pain, unki desire. Caption aur filter baad mein aata hai."},
+      {q:"Ek reel ka first 3 seconds weak hai toh kya expect karo?",
+       o:["Views thode kam aayenge sirf","Koi fark nahi padta algorithm ko","Algorithm usse push nahi karega — most viewers scroll kar denge","Hashtags se recover ho jaayega"],
+       c:2,f:"Algorithm watch time dekh ke decide karta hai push karna hai ya nahi. Pehle 3 seconds mein viewer ruka nahi toh watch time immediately ruin hota hai."},
+      {q:"Niche kya hota hai?",
+       o:["Jitne zyada topics cover karo utna better","Sirf ek platform choose karna","Viral content banana","Ek specific topic apne specific audience ke liye consistently — with your unique angle"],
+       c:3,f:"Niche = Topic + Audience + Angle. Jitna specific, utna zyada conversion. Sabke liye banao — matlab kisi ke liye nahi."},
+      {q:"Instagram algorithm kis cheez ko sabse zyada reward karta hai?",
+       o:["Watch time aur saves — engagement quality","Posting frequency","Paid promotions","Followers count"],
+       c:0,f:"Algorithm engagement quality dekta hai. Ek save ya share 100 likes se zyada valuable hai algorithmically."},
+      {q:"Content consistency ka sahi matlab kya hai?",
+       o:["Har platform pe active rehna","Sirf trending topics pe post karna","Roz post karna no matter what quality ho","Fixed schedule pe quality content — sustainable pace pe"],
+       c:3,f:"Consistency ka matlab burnout nahi. 3 pieces a week sustainably = far more effective than 7 rushed pieces."},
+      {q:"Bio mein kya hona chahiye?",
+       o:["Apne hobbies aur interests","Motivational quote","Exactly kya karte ho, kiske liye, aur unka next step kya hai","Sab social media handles"],
+       c:2,f:"Bio = Value proposition. Koi bhi 3 seconds mein decide karta hai follow karna hai ya nahi. Be specific, be clear."},
+      {q:"Pehle 1000 followers gain karne ka fastest organic way?",
+       o:["Celebrities ko tag karo","Ek very specific person ke liye banao — woh apne jaise logo mein share karega","Paid ads chalao","Giveaway karo"],
+       c:1,f:"Specificity wins. Jab content exactly ek type ke person ke liye ho — woh share karta hai apne circle mein."},
+      {q:"Content creation mein 'value' ka matlab kya hai?",
+       o:["Bahut saare topics cover karna","Expensive equipment use karna","Long videos banana","Viewer ki life mein kuch add karna — information, entertainment, ya inspiration"],
+       c:3,f:"Value = viewer ko kuch mila. Entertainment, education, ya inspiration — koi bhi ek. Without value, no retention."},
+      {q:"Hook ke teen main types kaun se hain?",
+       o:["Problem, Curiosity, Result","Like, Comment, Share","Short, Medium, Long","Trending, Original, Collab"],
+       c:0,f:"Problem hook — belief challenge karo. Curiosity hook — result dikhao method chupao. Result hook — specific numbers se credibility."},
+      {q:"Ek creator ke 300 followers hain lekin unhone ek skill-based service offer ki aur Rs.8,000 kamaye. Kaise?",
+       o:["Unko luck mila","Unke followers ne pressure daala","Yeh possible nahi — 10K chahiye pehle","Small but engaged audience + clear offer = income. Followers count nahi — clarity counts"],
+       c:3,f:"Yeh Content Crore ka core principle hai. 300 real followers > 10K random followers. Offer clarity + specific audience = income at any size."}
+    ],
+    res:{
+      low:{badge:'rb-b',title:'Foundation Needed',emoji:'🌱',desc:'Jo answers galat gaye — yahi cheezein most creators ko rok deti hain years tak. Good news: yeh sab rapidly seekha ja sakta hai.',pitch:'Cohort Session 1 specifically beginners ke liye banaya gaya hai — zero to clarity in 2 hours. Tumhara level perfect hai cohort ke liye.'},
+      mid:{badge:'rb-b',title:'Good Start — Fill The Gaps',emoji:'📊',desc:'Kuch cheezein clear hain, kuch nahi. Jo gaps hain woh dangerous hain — ek key piece missing hai jo sab kuch rok raha hai.',pitch:'Tum sahi direction mein soch rahe ho. Cohort mein in specific gaps ko live target karenge — aapke content pe personally.'},
+      high:{badge:'rb-i',title:'Strong Foundation!',emoji:'🚀',desc:'Basics strong hain. Ab strategy aur system banana hai. In foundations ko ek complete business system mein convert karo.',pitch:'Yeh exactly woh stage hai jab cohort maximum value deta hai. Foundation hai, system nahi. Hum woh system ek ek karke build karenge.'}
+    }
+  },
+  intermediate:{
+    name:'Intermediate',color:'#C9940C',
+    qs:[
+      {q:"Tumhara content views toh aa raha hai lekin followers nahi ban rahe. Sabse likely reason?",
+       o:["Hashtags galat hain","Posting time galat hai","Content discovery ke liye hai but no follow-worthy reason — niche unclear","Videos zyada lambi hain"],
+       c:2,f:"Views = rented attention. Follow karne ka reason chahiye — niche clarity, consistent POV, signal ki aur bhi aise content aayega."},
+      {q:"Content bank kyun zaroori hai?",
+       o:["Pre-created content ka stash jo consistency maintain karta hai without daily stress","Paison ka backup fund","Saved reels collection","Sponsored content store"],
+       c:0,f:"Content bank = consistency ka backbone. Bina bank ke hamesha last-minute mein banana padta hai. Bank se consistent posting + quality maintained."},
+      {q:"Reel aur Carousel mein se kaun zyada effectively new audience laata hai?",
+       o:["Dono bilkul same hain","Carousel — slides hoti hain toh log zyada time spend karte hain","Depends only on hashtags","Reel — algorithm pushes video to non-followers more aggressively"],
+       c:3,f:"Reels algorithmic discovery ke liye best hain. Carousels saves aur warm audience ke liye. Discovery = Reels."},
+      {q:"Agar tumhara niche 'fitness' hai toh yeh weak hai. Better version?",
+       o:["Health aur fitness tips for everyone","Gym exercises for beginners","Morning workout routines for working professionals in India who have 30 minutes","Fitness motivation daily"],
+       c:2,f:"Asymmetric advantage + specific audience. 'Working professionals in India, 30 mins' — itna specific ki sirf tum bol sakte ho yeh angle se."},
+      {q:"Brand deal ke liye minimum follower count kya hona chahiye?",
+       o:["Minimum 10,000 zaroor chahiye","Koi fixed number nahi — niche relevance aur engagement rate matter karta hai","Minimum 50,000","Minimum 1,00,000"],
+       c:1,f:"Brand deals engagement aur niche relevance pe depend karte hain. 1,000 highly engaged niche followers = better deal than 50K random."},
+      {q:"YouTube pe 4,000 watch hours fastest kaise achieve hota hai?",
+       o:["Gaming content banao — viral hota hai","Daily vlogs daalo","Long-form educational content for a specific niche audience consistently","Shorts banao — zyada push hote hain"],
+       c:2,f:"Watch hours long-form content se milte hain. Niche-specific educational content highest watch time produce karta hai kyunki viewers actually seekhne aate hain."},
+      {q:"Engagement rate good maana jaata hai kab?",
+       o:["50% se zyada hona chahiye hamesha","5-10% good hai for most niches, 10%+ excellent","Engagement rate matter nahi karta ab","2% se zyada hona chahiye — bas kaafi hai"],
+       c:1,f:"5-10% engagement rate solid indicator hai. Below 2% = audience disconnect. Brand deals mein yeh metric follower count se zyada important hai."},
+      {q:"Content repurposing kya hai?",
+       o:["Purana content delete karna aur dobara banana","Kisi aur ka content copy karna","Ek piece of content ko multiple formats mein convert karna — reel to carousel to caption to newsletter","Scheduling tool use karna"],
+       c:2,f:"Repurposing = ek effort, multiple outputs. Ek YouTube video se reel, carousel, caption, tweet, newsletter — sab nikal sakta hai."},
+      {q:"Sabse effective CTA content ke end mein kaun sa hota hai?",
+       o:["Like, share, subscribe — teeno ek saath","One specific action — comment mein X type karo ya bio link pe click karo","Follow karo aur friends ko bhi batao","Save kar lo aur aage share karo"],
+       c:1,f:"One specific CTA converts best. Multiple CTAs = confusion. Sirf ek maango — comment, link click, ya save."},
+      {q:"Ek creator 2 saal se post kar raha hai lekin income zero hai. Most likely reason?",
+       o:["Too much competition hai market mein","Wrong platform choose kiya","Content banaya lekin offer kabhi design nahi kiya — audience hai, vehicle nahi","Bad luck hai unhe"],
+       c:2,f:"Most common creator mistake. Content → Audience — sab build kiya. Lekin Income ka step — offer — kabhi design nahi hua. Bina offer ke audience business nahi hai."}
+    ],
+    res:{
+      low:{badge:'rb-b',title:'Foundation Review Needed',emoji:'📚',desc:'Intermediate level mein kuch important concepts unclear hain. Yeh exactly woh cheezein hain jo stuck creators ko aage nahi jaane deti.',pitch:'Cohort Session 1 aur 2 directly in gaps ko address karta hai — live, aapke actual content pe review ke saath. Join karo aur reverse karte hain.'},
+      mid:{badge:'rb-i',title:'You Know More Than Most',emoji:'💪',desc:'Knowledge solid hai. Missing piece usually execution system hai — consistency, content bank, offer design.',pitch:'Tum already zyada jaante ho majority creators se. Ab system chahiye jo knowledge ko results mein convert kare. Cohort exactly yahi karta hai.'},
+      high:{badge:'rb-p',title:'Intermediate Mastered!',emoji:'🎯',desc:'Intermediate level strongly clear. Pro level ke liye ready ho. Consider trying the Pro quiz next.',pitch:'Strong score! Cohort mein Pro-level concepts bhi cover hote hain — scale, monetisation, YouTube strategy.'}
+    }
+  },
+  pro:{
+    name:'Pro',color:'#FF6B35',
+    qs:[
+      {q:"Creator economy mein 'owned audience' aur 'rented audience' mein kya fark hai?",
+       o:["Owned = verified account sirf","Owned = email/WhatsApp/community jahan direct access ho. Rented = social media jahan algorithm control kare","Owned = paid followers, Rented = organic","Koi fark nahi — dono same hain"],
+       c:1,f:"Platform band ho jaaye — owned audience tumhare saath rahe. Rented audience algorithm pe dependent hai. Email list = most owned."},
+      {q:"Revenue diversification creator ke liye kyun critical hai?",
+       o:["Tax bachane ke liye","Zyada accounts banana ke liye","Competitors ko beat karne ke liye","Single stream ka risk — platform changes se entire income affect ho sakti hai"],
+       c:3,f:"Platform risk real hai. 8 creator revenue models hain. Minimum 2-3 active hone chahiye. Don't depend on one source."},
+      {q:"High engagement rate ke baad bhi revenue low hai. Most likely cause?",
+       o:["Offer design weak hai — engaged audience hai lekin clear next step nahi jo unhe buyer mein convert kare","Content quality low hai","Too many posts dal rahe ho","Followers sahi niche ke nahi hain"],
+       c:0,f:"Engagement to revenue bridge = clear offer. Trust ke bawajood agar offer nahi hai ya unclear hai — conversion zero rahega."},
+      {q:"YouTube monetisation ke liye AdSense se zyada lucrative kya hai initially?",
+       o:["YouTube Premium revenue","Super Thanks feature","Channel memberships","Brand deals + digital products + services while building toward AdSense — don't wait for 1K/4K"],
+       c:3,f:"AdSense revenue small creators ke liye negligible hai. Brand deals 10-100x more lucrative at smaller scale. Build AdSense ke saath saath."},
+      {q:"Content strategy mein 'pillar content' kya hota hai?",
+       o:["Most viral content jo gaya ho","Core comprehensive content jisse smaller pieces derive hoti hain","Paid sponsored content","Pinned posts on profile"],
+       c:1,f:"Pillar = hub. Ek detailed YouTube video se 10 reels, 5 carousels, 20 tweets nikal sakte hain. Pillar-first = maximum efficiency."},
+      {q:"Creator ke liye 'positioning' ka practical matlab?",
+       o:["Specific audience ke dimag mein ek specific category mein sabse credible hona","Profile ka visual look aur colors","Brand fonts aur colors decide karna","Posting frequency decide karna"],
+       c:0,f:"Positioning = category ownership. 'Indian fitness creator' nahi — 'Morning routine expert for 9-to-5 professionals in India.' Jitni specific, utna zyada authority."},
+      {q:"Collaboration deals mein 'audience overlap' kyun check karna chahiye?",
+       o:["Brand deals ke liye hamesha zaroori hai","Algorithm ke liye helpful hota hai","Followers count increase ke liye","Zyada overlap = kam net new reach. Complementary audience = genuinely new people"],
+       c:3,f:"Collaboration ka point hai new audience reach karna. Same audience = same log. Complementary creator = genuinely new audience."},
+      {q:"10K followers pe consistently Rs.0 income hai. Fastest fix?",
+       o:["Aur posts dalo","Ek clear service offer design karo aur ek reel specifically us offer ke liye banao","Collaborations karo pehle","Paid ads chalao"],
+       c:1,f:"10K engaged followers ke saath service income same week mein possible hai. Offer → targeted reel → DM — yeh 3-step process."},
+      {q:"Long-form (YouTube) aur short-form (Reels) ki ideal relationship?",
+       o:["Equal ratio hamesha best hai","Only short-form — it's the future","Short-form for discovery + long-form for depth + trust — both together = compound growth","Only long-form — more depth"],
+       c:2,f:"Short-form = top of funnel, discovery engine. Long-form = trust builder, YouTube watch hours. Both together compound each other."},
+      {q:"Ek reel 500K views gaya lekin sirf 200 followers bade. Kya galat hua?",
+       o:["Post time galat tha","Content mein follow karne ka reason nahi tha — no niche signal, no CTA, no reason to stay","Content bad tha","Hashtags nahi the"],
+       c:1,f:"Viral ne = growth. Views = rented attention. Agar content mein 'agar yeh pasand aaya toh yeh bhi milega' waali feeling nahi — follow nahi hoga."}
+    ],
+    res:{
+      low:{badge:'rb-i',title:'Level Up Needed',emoji:'📈',desc:'Pro concepts mein kuch important gaps hain. Yeh woh strategic thinking hai jo 5K-20K creators ko aage nahi jaane deti.',pitch:'Cohort Session 3 aur 4 directly in pro-level concepts pe kaam karta hai — revenue, offer design, YouTube strategy. Aao milke build karte hain.'},
+      mid:{badge:'rb-p',title:'Solid Pro Thinking',emoji:'💡',desc:'Strong strategic understanding hai. Now execution aur system consistency ki zaroorat hai. Theory pata hai — implementation system banana hai.',pitch:'Cohort mein hum is thinking ko actual systems mein convert karte hain — live, aapke actual content aur offer ke saath.'},
+      high:{badge:'rb-a',title:'Pro Level Cleared!',emoji:'🏆',desc:'Exceptional score. Tum Pro level clearly pass kiya. Advanced quiz try karo.',pitch:'Top score! Advanced level ke liye ready ho. Cohort specifically tumhare jaisi thinking ko scale karne mein help karega.'}
+    }
+  },
+  advanced:{
+    name:'Advanced',color:'#9B59B6',
+    qs:[
+      {q:"Creator business mein 'monetisation ladder' ka core principle?",
+       o:["Zyada products launch karo simultaneously","High ticket se seedha start karo","Free content mat do","Har offer pichhle ka problem solve kare aur naturally agla problem reveal kare — buyer ascends naturally"],
+       c:3,f:"Ladder vs catalogue. Har rung pichhle ki completion se naturally agla problem reveal karta hai. Buyer ascends kyunki they see the next problem — not because you pushed."},
+      {q:"Creator community mein 'completion peak' kab aata hai?",
+       o:["24-72 hours after buyer completes current offer — highest trust, highest conversion moment for next offer","Jab subscriber count 1L cross kare","Monthly meetup ke baad","Jab viral moment aaye"],
+       c:0,f:"Completion peak = highest trust moment. Buyer ne value liya, trust peak pe hai, next problem visible. Yahi window mein next offer present karo."},
+      {q:"Platform risk management ke liye sabse effective strategy?",
+       o:["Sirf ek platform pe laser focus karo","Paid ads pe rely karo","Owned channels build karo — email, WhatsApp, direct access — parallel to platform growth","Multiple platforms pe equally active rehna"],
+       c:2,f:"Platform diversification ne = platform spreading. Email + WhatsApp = owned. Inka algorithm nahi hota. Platform band ho — owned audience safe rahe."},
+      {q:"High-ticket offers (Rs.50K+) mein conversion ke liye sabse critical factor?",
+       o:["Payment plans dena","More features add karna","Price lower karo competitive rehne ke liye","3 certainties build karo — product certainty, trust certainty, company certainty — before asking"],
+       c:3,f:"Belfort's 3 certainties. Koi bhi high-ticket buy karne se pehle teeno certainties 10/10 chahiye. Ek bhi missing ho toh conversion fail."},
+      {q:"Content IP design kyun matter karta hai?",
+       o:["Copyright register karne ke liye","Ek unique recurring format banana jo sirf tumhara ho — easily replicable nahi","Trademark lene ke liye","Brand colors set karne ke liye"],
+       c:1,f:"Content IP = your signature. Tumhara unique format jo audience ke dimag mein permanently associated ho tumhare saath."},
+      {q:"Audience compounding kya hota hai creator business mein?",
+       o:["Email list grow karna","Viral content banana repeatedly","Followers count daily badhna","Existing audience ki trust se nayi audience milti hai — referrals, earned media — without extra acquisition cost"],
+       c:3,f:"Compounding = organic flywheel. Har satisfied community member 2-3 new members laata hai. Exponential growth — bina increasing acquisition cost ke."},
+      {q:"Ek niche mein clearly dominant hoon. Expansion kab karni chahiye?",
+       o:["Pehle din se multiple niches mein expand karo","Never expand — ek hi niche mein raho","Jab bhi feel ho expand karo","Jab current niche mein SVM clearly owned ho aur revenue stable ho — tab adjacent expansion"],
+       c:3,f:"Godin's SVM principle. Pehle ek niche completely own karo. Phir adjacently expand. Early expansion = diluted positioning everywhere."},
+      {q:"Creator ke liye LTV maximize karne ka most effective approach?",
+       o:["Ascension + frequency + retention + referrals — existing buyers ko ladder pe move karna","Naye customers dhundte rehna hamesha","Price badhate rehna regularly","More products launch karna rapidly"],
+       c:0,f:"LTV = Deal Size x Transactions x Customer Lifespan. Existing buyers mein se 20% usually 80% revenue generate karte hain. Retention > acquisition in later stages."},
+      {q:"Content-driven business mein 'flywheel effect' kab activate hota hai?",
+       o:["Jab team hire karo","1 million followers ke baad automatically","Jab content aur audience aur trust aur revenue ka cycle self-sustaining ho jaaye without proportional input increase","Jab paid ads start karo"],
+       c:2,f:"Flywheel = self-sustaining momentum. Initial energy zyada lagti hai. Ek point ke baad cycle khud chalne lagti hai. Most creators quit before activation."},
+      {q:"'Business operator mindset' vs 'content creator mindset' mein practical fark?",
+       o:["Business operator zyada posts karta hai","Koi meaningful fark nahi hota","Content creator zyada creative hota hai","Business operator poochhta hai — yeh audience ko trust ke step karega? Creator poochhta hai — yeh viral hoga?"],
+       c:3,f:"Yeh Content Crore Chapter 1 ka core thesis hai. Woh question hi outcome determine karta hai. Operator builds systems. Creator chases metrics."}
+    ],
+    res:{
+      low:{badge:'rb-p',title:'Strategic Gaps Found',emoji:'🔍',desc:'Advanced level ke concepts kuch places mein unclear hain. Real-world business decisions mein yeh costly ho sakti hain.',pitch:'Advanced mein bhi gaps hain — honest feedback. Cohort mein Tushar directly in concepts pe kaam karta hai — architecture, LTV, flywheel.'},
+      mid:{badge:'rb-a',title:'Advanced Thinker',emoji:'🎯',desc:'Strong advanced understanding hai. Scale karne ke liye ab execution consistency chahiye — systems, team, architecture.',pitch:'Cohort tumhare liye woh last pieces provide karta hai — direct access, community, aur Tushar ka complete 65-chapter framework.'},
+      high:{badge:'rb-a',title:'Master Level Creator',emoji:'👑',desc:'Exceptional. Tum Content Crore system deeply samajh chuke ho. Ab implementation aur scaling ka waqt hai.',pitch:'Perfect score. Tum exactly woh creator ho jiske liye yeh cohort designed hai. Founding Batch mein welcome hai.'}
+    }
+  }
+};
+
+var userName='', currentLevel='', currentQ=0, score=0, answered=false, userAnswers=[];
+
+function show(id){
+  ['nameScreen','homeScreen','quizScreen','resultScreen'].forEach(function(s){
+    document.getElementById(s).classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+document.getElementById('startBtn').onclick = function(){
+  var name = document.getElementById('nameInput').value.trim();
+  if(!name){ document.getElementById('nameError').style.display='block'; document.getElementById('nameInput').focus(); return; }
+  userName = name;
+  document.getElementById('nameError').style.display='none';
+  show('homeScreen');
+};
+document.getElementById('nameInput').onkeydown = function(e){ if(e.key==='Enter') document.getElementById('startBtn').click(); };
+
+function startQuiz(level){
+  currentLevel=level; currentQ=0; score=0; answered=false; userAnswers=[];
+  var d=QD[level];
+  var tag=document.getElementById('qLevelTag');
+  tag.textContent=d.name+' Level'; tag.style.color=d.color;
+  document.getElementById('progressFill').style.background=d.color;
+  show('quizScreen');
+  renderQ();
+}
+
+function renderQ(){
+  var d=QD[currentLevel], q=d.qs[currentQ], total=d.qs.length;
+  document.getElementById('qNum').textContent='Question '+(currentQ+1)+' of '+total;
+  document.getElementById('qText').textContent=q.q;
+  var pct=(currentQ/total)*100;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressTxt').textContent=currentQ+' of '+total+' completed';
+  var con=document.getElementById('optsContainer');
+  con.innerHTML='';
+  ['A','B','C','D'].forEach(function(l,i){
+    var div=document.createElement('div');
+    div.className='opt';
+    div.innerHTML='<span class="opt-letter">'+l+'</span><span class="opt-text">'+q.o[i]+'</span><span class="opt-icon"></span>';
+    div.onclick=function(){ selectAns(i); };
+    con.appendChild(div);
+  });
+  var fb=document.getElementById('fbBox');
+  fb.className='fb-box'; fb.textContent='';
+  var nb=document.getElementById('nextBtn');
+  nb.className='next-btn'; nb.style.display='none';
+  answered=false;
+}
+
+function selectAns(idx){
+  if(answered) return;
+  answered=true;
+  var q=QD[currentLevel].qs[currentQ];
+  var isC=(idx===q.c);
+  if(isC) score++;
+  userAnswers.push({q:q.q,sel:idx,cor:q.c,opts:q.o,ok:isC});
+  var opts=document.querySelectorAll('.opt');
+  opts.forEach(function(o){ o.classList.add('disabled'); });
+  opts[idx].classList.add(isC?'correct':'wrong');
+  opts[idx].querySelector('.opt-icon').textContent=isC?'✓':'✗';
+  if(!isC){ opts[q.c].classList.add('correct'); opts[q.c].querySelector('.opt-icon').textContent='✓'; }
+  var fb=document.getElementById('fbBox');
+  fb.className='fb-box show '+(isC?'fb-c':'fb-w');
+  fb.textContent=(isC?'✓ ':'✗ ')+q.f;
+  var nb=document.getElementById('nextBtn');
+  var isLast=(currentQ===QD[currentLevel].qs.length-1);
+  nb.textContent=isLast?'See My Results →':'Next Question →';
+  nb.className='next-btn show'; nb.style.display='inline-block';
+}
+
+document.getElementById('nextBtn').onclick=function(){
+  var d=QD[currentLevel];
+  if(currentQ<d.qs.length-1){ currentQ++; renderQ(); }
+  else showResult();
+};
+
+function showResult(){
+  var d=QD[currentLevel], total=d.qs.length, pct=score/total;
+  var tier=pct<=0.4?'low':pct<=0.7?'mid':'high';
+  var r=d.res[tier];
+  document.getElementById('scoreNum').textContent=score;
+  document.getElementById('scoreDen').textContent='/ '+total;
+  // Animate arc
+  var circ=408.41, offset=circ-(circ*(score/total));
+  setTimeout(function(){ document.getElementById('scoreArc').style.strokeDashoffset=offset; },100);
+  // Badge color
+  var arcEl=document.getElementById('scoreArc');
+  arcEl.style.stroke=d.color;
+  var badge=document.getElementById('rBadge');
+  badge.className='r-badge '+r.badge;
+  badge.textContent=d.name+' Level — '+score+'/'+total;
+  document.getElementById('rName').textContent=userName+"'s Result";
+  document.getElementById('rTitle').textContent=r.emoji+' '+r.title;
+  document.getElementById('rDesc').textContent=r.desc;
+  document.getElementById('pitchContent').textContent=r.pitch;
+  // Next level button
+  var levels=['beginner','intermediate','pro','advanced'];
+  var ci=levels.indexOf(currentLevel);
+  var nlb=document.getElementById('nextLevelBtn');
+  if(ci<levels.length-1){
+    nlb.textContent='Try '+QD[levels[ci+1]].name+' Level →';
+    nlb.style.display='inline-block';
+  } else { nlb.style.display='none'; }
+  // Review
+  var rev=document.getElementById('reviewAnswers');
+  rev.innerHTML='';
+  userAnswers.forEach(function(a,i){
+    var div=document.createElement('div');
+    div.className='review-item';
+    div.innerHTML='<div class="review-q">Q'+(i+1)+': '+a.q+'</div>'
+      +'<div class="'+(a.ok?'review-c':'review-w')+'">'
+      +(a.ok?'✓ Correct: ':'✗ Your answer: ')+a.opts[a.sel]
+      +(a.ok?'':'<br><span class="review-c">✓ Correct: '+a.opts[a.cor]+'</span>')
+      +'</div>';
+    rev.appendChild(div);
+  });
+  show('resultScreen');
+}
+
+function tryNextLevel(){
+  var levels=['beginner','intermediate','pro','advanced'];
+  var ci=levels.indexOf(currentLevel);
+  if(ci<levels.length-1) startQuiz(levels[ci+1]);
+}
+function goHome(){ show('homeScreen'); }
+</script>
+</body>
+</html>
