@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Crore Cohort — Founding Member Application</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#08080A;--white:#F4F0E8;--orange:#D4460F;--ol:#FF6B35;
+  --cream:#EDE8DE;--muted:#9A958D;--border:#252320;--card:#111010;
+  --gl:#2DB87A;--gold:#C9940C;--red:#C0392B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);min-height:100vh}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:.5}
+
+/* SCREENS */
+.screen{display:none;position:relative;z-index:1;min-height:100vh;padding:48px 24px;max-width:720px;margin:0 auto;flex-direction:column;align-items:center}
+.screen.active{display:flex;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* COMMON */
+.pill{display:inline-flex;align-items:center;gap:7px;background:rgba(212,70,15,.12);border:1px solid rgba(212,70,15,.35);padding:5px 14px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ol);margin-bottom:18px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--ol);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.bb{font-family:'Bebas Neue',sans-serif}
+.acc{color:var(--orange)}
+.itl{font-family:'DM Serif Display',serif;font-style:italic}
+.hdiv{width:44px;height:2px;background:var(--orange);border-radius:2px;margin:14px auto}
+.card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px 22px;width:100%}
+.card-o{border-left:3px solid var(--orange)}
+.card-g{border-left:3px solid var(--gl)}
+.card-gold{border-left:3px solid var(--gold)}
+
+/* PROGRESS */
+.progress-wrap{width:100%;margin-bottom:28px}
+.progress-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12px;color:var(--muted)}
+.progress-label strong{color:var(--white)}
+.progress-bar{width:100%;height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:var(--orange);border-radius:3px;transition:width .5s ease}
+.section-tag{display:inline-block;background:rgba(212,70,15,.1);border:1px solid rgba(212,70,15,.3);color:var(--ol);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:4px;margin-bottom:14px}
+
+/* TRUST BANNERS */
+.trust-banner{width:100%;padding:14px 18px;border-radius:8px;font-size:13px;line-height:1.65;margin:16px 0;display:flex;align-items:flex-start;gap:12px}
+.tb-orange{background:rgba(212,70,15,.07);border:1px solid rgba(212,70,15,.25);color:var(--cream)}
+.tb-green{background:rgba(45,184,122,.07);border:1px solid rgba(45,184,122,.25);color:var(--cream)}
+.tb-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+
+/* FORM ELEMENTS */
+.form-group{width:100%;margin-bottom:20px}
+.form-group label{display:block;font-size:13px;font-weight:700;color:var(--white);margin-bottom:8px;line-height:1.5}
+.form-group .sublabel{font-size:11px;color:var(--muted);margin-top:-4px;margin-bottom:8px;line-height:1.5}
+.form-input{width:100%;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:12px 16px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--white);outline:none;transition:border-color .2s}
+.form-input:focus{border-color:var(--orange)}
+.form-input::placeholder{color:var(--muted)}
+textarea.form-input{resize:vertical;min-height:90px;line-height:1.6}
+.form-error{font-size:12px;color:#FF8C70;margin-top:5px;display:none}
+
+/* OPTIONS GRID */
+.opts-grid{display:flex;flex-direction:column;gap:8px;width:100%}
+.opts-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+@media(max-width:500px){.opts-grid-2{grid-template-columns:1fr}}
+.opt-btn{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:12px 16px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px;text-align:left;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--cream);width:100%}
+.opt-btn:hover{border-color:var(--orange);background:rgba(212,70,15,.05)}
+.opt-btn.selected{border-color:var(--orange);background:rgba(212,70,15,.08);color:var(--white)}
+.opt-btn.multi-selected{border-color:var(--gl);background:rgba(45,184,122,.06);color:var(--white)}
+.opt-check{width:18px;height:18px;border-radius:50%;border:1px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .2s}
+.opt-btn.selected .opt-check,.opt-btn.multi-selected .opt-check{background:var(--orange);border-color:var(--orange);color:var(--white)}
+.opt-text{line-height:1.4;flex:1}
+
+/* KNOWLEDGE Q */
+.kq-wrap{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px 20px;width:100%;margin-bottom:14px}
+.kq-q{font-size:14px;font-weight:600;color:var(--white);margin-bottom:12px;line-height:1.5}
+.kq-opts{display:flex;flex-direction:column;gap:7px}
+.kq-opt{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:5px;padding:10px 14px;cursor:pointer;transition:all .18s;font-size:13px;color:var(--cream);display:flex;align-items:center;gap:10px}
+.kq-opt:hover{border-color:var(--orange);background:rgba(212,70,15,.05)}
+.kq-opt.selected{border-color:var(--orange);background:rgba(212,70,15,.07);color:var(--white)}
+.kq-letter{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--muted);min-width:18px}
+.kq-opt.selected .kq-letter{color:var(--ol)}
+
+/* NAV BUTTONS */
+.nav-wrap{width:100%;display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.btn-next{flex:1;background:var(--orange);color:var(--white);border:none;padding:14px 24px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;border-radius:6px;transition:all .2s;min-width:140px}
+.btn-next:hover{background:var(--ol);transform:translateY(-2px)}
+.btn-next:disabled{background:var(--border);color:var(--muted);cursor:not-allowed;transform:none}
+.btn-back{background:var(--card);color:var(--white);border:1px solid var(--border);padding:14px 20px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border-radius:6px;transition:all .2s}
+.btn-back:hover{border-color:var(--ol);color:var(--ol)}
+
+/* SCORE CIRCLE */
+.score-wrap{position:relative;width:140px;height:140px;margin:20px auto}
+.score-svg{transform:rotate(-90deg)}
+.score-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-num{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:var(--white)}
+.score-den{font-size:11px;color:var(--muted)}
+
+/* VERDICT */
+.verdict-box{width:100%;border-radius:10px;padding:20px 22px;margin:16px 0}
+.v-selected{background:rgba(45,184,122,.07);border:1px solid rgba(45,184,122,.3)}
+.v-waitlist{background:rgba(201,148,12,.07);border:1px solid rgba(201,148,12,.3)}
+.v-reapply{background:rgba(192,57,43,.07);border:1px solid rgba(192,57,43,.3)}
+.v-title{font-family:'Bebas Neue',sans-serif;font-size:28px;margin-bottom:6px}
+.v-selected .v-title{color:var(--gl)}
+.v-waitlist .v-title{color:var(--gold)}
+.v-reapply .v-title{color:#FF8C70}
+.v-desc{font-size:14px;color:var(--cream);line-height:1.75}
+
+/* RESULT ACTIONS */
+.result-actions{width:100%;display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.btn-join{width:100%;background:var(--orange);color:var(--white);border:none;padding:16px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;border-radius:8px;transition:all .2s;text-decoration:none;display:block;text-align:center}
+.btn-join:hover{background:var(--ol);transform:translateY(-2px)}
+.screenshot-note{background:rgba(212,70,15,.06);border:1px solid rgba(212,70,15,.2);border-radius:8px;padding:14px 18px;font-size:13px;color:var(--cream);line-height:1.65;text-align:center;margin-top:12px}
+
+/* REVIEW */
+.review-item{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:11px 14px;margin-bottom:6px;font-size:12px}
+.ri-q{color:var(--muted);margin-bottom:3px}
+.ri-a{color:var(--cream)}
+</style>
+</head>
+<body>
+
+<!-- SCREEN 1: INTRO / NAME -->
+<div class="screen active" id="s1">
+  <div class="pill"><span class="dot"></span>Founding Batch · Limited Seats</div>
+  <div class="bb" style="font-size:clamp(44px,9vw,84px);line-height:.9;text-align:center;margin:20px 0 14px">
+    Content Crore<br><span class="acc itl">Founding</span><br>Member<br>Application.
+  </div>
+  <div class="hdiv"></div>
+  <p style="font-size:15px;color:var(--cream);text-align:center;max-width:560px;line-height:1.8;margin-bottom:20px">
+    This is not a registration form. This is an application.<br>
+    We are selecting <strong>30 founding members</strong> for Batch 1 of Content Crore — not on a first-come basis, but on the basis of <strong>intent, seriousness, and honesty.</strong>
+  </p>
+  <div class="trust-banner tb-orange">
+    <div class="tb-icon">⚠️</div>
+    <div><strong>This form will take 8-12 minutes.</strong> It is intentionally long because we are investing in you — and we need to know if you are serious enough to invest in yourself. If you are looking for a shortcut, this is not the right place.</div>
+  </div>
+  <div class="card card-o" style="margin-bottom:20px">
+    <div style="font-size:11px;color:var(--ol);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">What This Application Checks</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;gap:10px;font-size:13px;color:var(--cream)"><span style="color:var(--ol)">→</span> Your honest current situation — no judgement, just clarity</div>
+      <div style="display:flex;gap:10px;font-size:13px;color:var(--cream)"><span style="color:var(--ol)">→</span> Your goals, dreams, and why this matters to you specifically</div>
+      <div style="display:flex;gap:10px;font-size:13px;color:var(--cream)"><span style="color:var(--ol)">→</span> Your knowledge of content creation fundamentals</div>
+      <div style="display:flex;gap:10px;font-size:13px;color:var(--cream)"><span style="color:var(--ol)">→</span> Your commitment level — we need people who will do the work</div>
+      <div style="display:flex;gap:10px;font-size:13px;color:var(--cream)"><span style="color:var(--ol)">→</span> Your honesty — this matters more than your answers</div>
+    </div>
+  </div>
+  <div style="width:100%;margin-bottom:20px">
+    <label style="font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:700;display:block;margin-bottom:8px">Your Full Name</label>
+    <input type="text" class="form-input" id="nameInput" placeholder="Type your full name..." autocomplete="name">
+    <div class="form-error" id="nameErr">Please enter your name.</div>
+    <label style="font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:700;display:block;margin:14px 0 8px">Your WhatsApp Number</label>
+    <input type="tel" class="form-input" id="phoneInput" placeholder="+91 98765 43210" autocomplete="tel">
+    <div class="form-error" id="phoneErr">Please enter your WhatsApp number.</div>
+    <label style="font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:700;display:block;margin:14px 0 8px">Your Instagram Handle</label>
+    <input type="text" class="form-input" id="instaInput" placeholder="@yourusername">
+    <div class="form-error" id="instaErr">Please enter your Instagram handle.</div>
+  </div>
+  <p style="font-size:12px;color:var(--muted);text-align:center;margin-bottom:16px">Tushar Vakt · @tusharvakt · Content Crore Foundation Cohort — Batch 1</p>
+  <button class="btn-next" style="width:100%" onclick="goTo(2)">Begin Application →</button>
+</div>
+
+<!-- SCREEN 2: CURRENT SITUATION -->
+<div class="screen" id="s2">
+  <div class="progress-wrap">
+    <div class="progress-label"><strong>Section 1 of 5</strong><span id="p2txt">20% complete</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:20%"></div></div>
+  </div>
+  <div class="section-tag">Your Current Situation</div>
+  <h2 class="bb" style="font-size:clamp(32px,5vw,52px);text-align:center;margin-bottom:8px">Where Are You <span class="acc">Right Now?</span></h2>
+  <p style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:22px;line-height:1.6">Be completely honest. There are no wrong answers here — only dishonest ones.</p>
+
+  <div class="form-group">
+    <label>How long have you been creating content?</label>
+    <div class="opts-grid">
+      <button class="opt-btn" onclick="selectSingle(this,'q_duration')"><div class="opt-check">✓</div><span class="opt-text">I haven't started yet — I want to start properly</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_duration')"><div class="opt-check">✓</div><span class="opt-text">Less than 3 months — just started</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_duration')"><div class="opt-check">✓</div><span class="opt-text">3 to 12 months — been at it for a while</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_duration')"><div class="opt-check">✓</div><span class="opt-text">More than 1 year — stuck and need a system</span></button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>How many followers do you have right now on your primary platform?</label>
+    <div class="opts-grid-2">
+      <button class="opt-btn" onclick="selectSingle(this,'q_followers')"><div class="opt-check">✓</div><span class="opt-text">0 – 100</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_followers')"><div class="opt-check">✓</div><span class="opt-text">100 – 500</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_followers')"><div class="opt-check">✓</div><span class="opt-text">500 – 2,000</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_followers')"><div class="opt-check">✓</div><span class="opt-text">2,000 – 10,000</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_followers')"><div class="opt-check">✓</div><span class="opt-text">10,000+</span></button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>What is your current income from content creation?</label>
+    <div class="opts-grid">
+      <button class="opt-btn" onclick="selectSingle(this,'q_income')"><div class="opt-check">✓</div><span class="opt-text">Zero — I haven't made anything yet</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_income')"><div class="opt-check">✓</div><span class="opt-text">₹1 to ₹5,000/month — very irregular</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_income')"><div class="opt-check">✓</div><span class="opt-text">₹5,000 to ₹20,000/month — growing but inconsistent</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_income')"><div class="opt-check">✓</div><span class="opt-text">₹20,000+/month — stable but want to scale</span></button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>What does your current content situation feel like honestly?</label>
+    <div class="opts-grid">
+      <button class="opt-btn" onclick="selectSingle(this,'q_feeling')"><div class="opt-check">✓</div><span class="opt-text">Completely lost — I don't know where to start</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_feeling')"><div class="opt-check">✓</div><span class="opt-text">I post but nothing grows — invisible despite effort</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_feeling')"><div class="opt-check">✓</div><span class="opt-text">I get views but no followers or income</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_feeling')"><div class="opt-check">✓</div><span class="opt-text">Growing slowly — need a faster, structured system</span></button>
+    </div>
+  </div>
+
+  <div class="nav-wrap">
+    <button class="btn-back" onclick="goTo(1)">← Back</button>
+    <button class="btn-next" onclick="goTo(3)">Continue →</button>
+  </div>
+</div>
+
+<!-- SCREEN 3: GOALS + DREAMS + PAIN -->
+<div class="screen" id="s3">
+  <div class="progress-wrap">
+    <div class="progress-label"><strong>Section 2 of 5</strong><span>40% complete</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
+  </div>
+  <div class="section-tag">Your Goals, Dreams & Pain</div>
+  <h2 class="bb" style="font-size:clamp(32px,5vw,52px);text-align:center;margin-bottom:8px">What Do You <span class="acc">Actually Want?</span></h2>
+  <p style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:22px;line-height:1.6">This section tells us whether we are the right fit for each other.</p>
+
+  <div class="form-group">
+    <label>What is your primary goal from content creation?</label>
+    <div class="opts-grid">
+      <button class="opt-btn" onclick="selectSingle(this,'q_goal')"><div class="opt-check">✓</div><span class="opt-text">Earn a stable side income alongside my job or studies</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_goal')"><div class="opt-check">✓</div><span class="opt-text">Build a full-time creator business and leave my job</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_goal')"><div class="opt-check">✓</div><span class="opt-text">Build a personal brand for my existing business or career</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_goal')"><div class="opt-check">✓</div><span class="opt-text">Grow a serious audience and get recognised in my niche</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_goal')"><div class="opt-check">✓</div><span class="opt-text">Achieve YouTube monetisation — 1K subs + 4K hours</span></button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>By when do you want to see your first income from content?</label>
+    <div class="opts-grid-2">
+      <button class="opt-btn" onclick="selectSingle(this,'q_timeline')"><div class="opt-check">✓</div><span class="opt-text">Within 30 days</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_timeline')"><div class="opt-check">✓</div><span class="opt-text">Within 3 months</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_timeline')"><div class="opt-check">✓</div><span class="opt-text">Within 6 months</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_timeline')"><div class="opt-check">✓</div><span class="opt-text">Within 1 year</span></button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>What has been your biggest obstacle to getting results so far? (Select all that apply)</label>
+    <div class="opts-grid" id="q_obstacles">
+      <button class="opt-btn" onclick="selectMulti(this,'q_obstacles')"><div class="opt-check">✓</div><span class="opt-text">I don't know what content to make — no clarity</span></button>
+      <button class="opt-btn" onclick="selectMulti(this,'q_obstacles')"><div class="opt-check">✓</div><span class="opt-text">I make content but it doesn't get views</span></button>
+      <button class="opt-btn" onclick="selectMulti(this,'q_obstacles')"><div class="opt-check">✓</div><span class="opt-text">I can't stay consistent — I burn out quickly</span></button>
+      <button class="opt-btn" onclick="selectMulti(this,'q_obstacles')"><div class="opt-check">✓</div><span class="opt-text">I don't know how to make money from it</span></button>
+      <button class="opt-btn" onclick="selectMulti(this,'q_obstacles')"><div class="opt-check">✓</div><span class="opt-text">I'm not sure if my niche is right</span></button>
+      <button class="opt-btn" onclick="selectMulti(this,'q_obstacles')"><div class="opt-check">✓</div><span class="opt-text">Self-doubt — I don't feel good enough</span></button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>In one sentence — why do you want to join this cohort specifically?</label>
+    <div class="sublabel">Be honest. This is the most important answer in the entire form.</div>
+    <textarea class="form-input" id="q_why" placeholder="Tell Tushar directly — why you, why now, why this..."></textarea>
+    <div class="form-error" id="whyErr">Please write at least 20 characters here.</div>
+  </div>
+
+  <div class="trust-banner tb-green">
+    <div class="tb-icon">💚</div>
+    <div>You're doing great. You've made it through Section 2 of 5. The fact that you're still here tells us something about your seriousness. Keep going — we're reading every answer carefully.</div>
+  </div>
+
+  <div class="nav-wrap">
+    <button class="btn-back" onclick="goTo(2)">← Back</button>
+    <button class="btn-next" onclick="goTo(4)">Continue →</button>
+  </div>
+</div>
+
+<!-- SCREEN 4: COMMITMENT + INTENT -->
+<div class="screen" id="s4">
+  <div class="progress-wrap">
+    <div class="progress-label"><strong>Section 3 of 5</strong><span>60% complete</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+  </div>
+  <div class="section-tag">Commitment & Intent</div>
+  <h2 class="bb" style="font-size:clamp(32px,5vw,52px);text-align:center;margin-bottom:8px">How Serious <span class="acc">Are You Really?</span></h2>
+  <p style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:22px;line-height:1.6">This section is the hardest part of the application. Answer honestly — we can tell.</p>
+
+  <div class="form-group">
+    <label>How many hours per week can you realistically commit to content creation during the 4-week cohort?</label>
+    <div class="opts-grid-2">
+      <button class="opt-btn" onclick="selectSingle(this,'q_hours')"><div class="opt-check">✓</div><span class="opt-text">Less than 3 hours/week</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_hours')"><div class="opt-check">✓</div><span class="opt-text">3 to 5 hours/week</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_hours')"><div class="opt-check">✓</div><span class="opt-text">5 to 10 hours/week</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_hours')"><div class="opt-check">✓</div><span class="opt-text">10+ hours/week</span></button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>The cohort has 4 live Sunday sessions — June 7, 14, 21, 28 at 10AM IST. Can you attend all 4?</label>
+    <div class="opts-grid">
+      <button class="opt-btn" onclick="selectSingle(this,'q_attend')"><div class="opt-check">✓</div><span class="opt-text">Yes — I will block all 4 Sundays right now</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_attend')"><div class="opt-check">✓</div><span class="opt-text">I can attend 3 of 4 — one Sunday has a conflict</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_attend')"><div class="opt-check">✓</div><span class="opt-text">Not sure — I'll try to make it work</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_attend')"><div class="opt-check">✓</div><span class="opt-text">Probably only 1 or 2 — I'm very busy</span></button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>If Tushar gives you an assignment after Session 1 — what will you do?</label>
+    <div class="opts-grid">
+      <button class="opt-btn" onclick="selectSingle(this,'q_assignment')"><div class="opt-check">✓</div><span class="opt-text">I will complete it before Session 2 no matter what</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_assignment')"><div class="opt-check">✓</div><span class="opt-text">I will try but may need more time</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_assignment')"><div class="opt-check">✓</div><span class="opt-text">Depends on how difficult it is</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_assignment')"><div class="opt-check">✓</div><span class="opt-text">I'll do it when I feel motivated</span></button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Be honest — what is the real reason you haven't invested in your content education before?</label>
+    <div class="opts-grid">
+      <button class="opt-btn" onclick="selectSingle(this,'q_barrier')"><div class="opt-check">✓</div><span class="opt-text">Money was a barrier — couldn't afford it</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_barrier')"><div class="opt-check">✓</div><span class="opt-text">I didn't find the right person or programme</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_barrier')"><div class="opt-check">✓</div><span class="opt-text">Self-doubt — I wasn't sure it would work for me</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_barrier')"><div class="opt-check">✓</div><span class="opt-text">I thought I could figure it out on my own</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_barrier')"><div class="opt-check">✓</div><span class="opt-text">I've invested before and it didn't work</span></button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Tushar offers the Iron Guarantee — if you do the work and don't get results, he works with you 1-on-1 until you do. What does this tell you?</label>
+    <div class="opts-grid">
+      <button class="opt-btn" onclick="selectSingle(this,'q_guarantee')"><div class="opt-check">✓</div><span class="opt-text">He is confident the system works — and so am I now</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_guarantee')"><div class="opt-check">✓</div><span class="opt-text">It removes my fear of losing money</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_guarantee')"><div class="opt-check">✓</div><span class="opt-text">It sounds too good — I'm still not sure</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_guarantee')"><div class="opt-check">✓</div><span class="opt-text">It doesn't matter — I will do the work regardless</span></button>
+    </div>
+  </div>
+
+  <div class="trust-banner tb-orange" style="margin-top:4px">
+    <div class="tb-icon">🔥</div>
+    <div>You have reached Section 3 of 5. Most people who fill this form up to this point are genuinely serious. You are in the right place. The next section is where we test your knowledge — answer honestly, not perfectly.</div>
+  </div>
+
+  <div class="nav-wrap">
+    <button class="btn-back" onclick="goTo(3)">← Back</button>
+    <button class="btn-next" onclick="goTo(5)">Continue →</button>
+  </div>
+</div>
+
+<!-- SCREEN 5: KNOWLEDGE TEST -->
+<div class="screen" id="s5">
+  <div class="progress-wrap">
+    <div class="progress-label"><strong>Section 4 of 5</strong><span>80% complete</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+  </div>
+  <div class="section-tag">Knowledge Check</div>
+  <h2 class="bb" style="font-size:clamp(32px,5vw,52px);text-align:center;margin-bottom:8px">What Do You <span class="acc">Already Know?</span></h2>
+  <p style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:22px;line-height:1.6">5 quick questions. We are not looking for perfect scores — we are checking if you are honest when you don't know something. Guessing badly is worse than admitting you don't know.</p>
+
+  <div class="kq-wrap">
+    <div class="kq-q">1. You post a reel every day for 30 days. Views are low throughout. What is the most likely root cause?</div>
+    <div class="kq-opts" id="kq1">
+      <button class="kq-opt" onclick="selectKQ(this,'kq1',false)"><span class="kq-letter">A</span>Hashtags are wrong</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq1',false)"><span class="kq-letter">B</span>You're posting at wrong times</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq1',true)"><span class="kq-letter">C</span>The hook in the first 2-3 seconds is not stopping the scroll</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq1',false)"><span class="kq-letter">D</span>Your editing quality is low</button>
+    </div>
+  </div>
+
+  <div class="kq-wrap">
+    <div class="kq-q">2. What is the difference between 'rented attention' and 'owned audience'?</div>
+    <div class="kq-opts" id="kq2">
+      <button class="kq-opt" onclick="selectKQ(this,'kq2',false)"><span class="kq-letter">A</span>Rented = organic, owned = paid followers</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq2',true)"><span class="kq-letter">B</span>Rented = views from algorithm that may not return. Owned = community that chose you and stays</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq2',false)"><span class="kq-letter">C</span>There is no meaningful difference</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq2',false)"><span class="kq-letter">D</span>Rented = videos, owned = photos</button>
+    </div>
+  </div>
+
+  <div class="kq-wrap">
+    <div class="kq-q">3. A creator has 800 followers and earns ₹15,000/month from content. Another has 50,000 followers and earns ₹3,000/month. Why?</div>
+    <div class="kq-opts" id="kq3">
+      <button class="kq-opt" onclick="selectKQ(this,'kq3',false)"><span class="kq-letter">A</span>The 800-follower creator got lucky with a viral post</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq3',false)"><span class="kq-letter">B</span>The 50,000-follower creator is in the wrong niche</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq3',true)"><span class="kq-letter">C</span>The 800-follower creator designed a clear offer. The 50,000-follower creator only built an audience without a monetisation path.</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq3',false)"><span class="kq-letter">D</span>Follower count is the only thing that matters for income</button>
+    </div>
+  </div>
+
+  <div class="kq-wrap">
+    <div class="kq-q">4. What does 'niche' actually mean in content creation?</div>
+    <div class="kq-opts" id="kq4">
+      <button class="kq-opt" onclick="selectKQ(this,'kq4',false)"><span class="kq-letter">A</span>The number of topics you cover</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq4',false)"><span class="kq-letter">B</span>Only one platform to focus on</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq4',false)"><span class="kq-letter">C</span>How viral your content gets</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq4',true)"><span class="kq-letter">D</span>A specific topic + specific audience + your unique angle — the combination only you can own</button>
+    </div>
+  </div>
+
+  <div class="kq-wrap">
+    <div class="kq-q">5. Tushar teaches Attention → Audience → Income. What happens when creators reverse this sequence?</div>
+    <div class="kq-opts" id="kq5">
+      <button class="kq-opt" onclick="selectKQ(this,'kq5',true)"><span class="kq-letter">A</span>They try to monetise before building trust — leading to frustration, low conversion, and eventually quitting</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq5',false)"><span class="kq-letter">B</span>They grow faster by skipping unnecessary steps</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq5',false)"><span class="kq-letter">C</span>Nothing changes — the order does not matter</button>
+      <button class="kq-opt" onclick="selectKQ(this,'kq5',false)"><span class="kq-letter">D</span>They get more brand deals</button>
+    </div>
+  </div>
+
+  <div class="trust-banner tb-green">
+    <div class="tb-icon">✅</div>
+    <div><strong>You are almost there.</strong> Section 4 complete. One final section — and then your personalised result. You have shown patience and commitment just by reaching this point. That tells us a lot.</div>
+  </div>
+
+  <div class="nav-wrap">
+    <button class="btn-back" onclick="goTo(4)">← Back</button>
+    <button class="btn-next" onclick="goTo(6)">Final Section →</button>
+  </div>
+</div>
+
+<!-- SCREEN 6: FINAL HONESTY CHECK -->
+<div class="screen" id="s6">
+  <div class="progress-wrap">
+    <div class="progress-label"><strong>Section 5 of 5 — Final</strong><span>95% complete</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:95%"></div></div>
+  </div>
+  <div class="section-tag">The Honesty Check</div>
+  <h2 class="bb" style="font-size:clamp(32px,5vw,52px);text-align:center;margin-bottom:8px">Last Few <span class="acc">Real Questions.</span></h2>
+  <p style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:22px;line-height:1.6">These last questions matter more than all the others combined.</p>
+
+  <div class="form-group">
+    <label>Have you taken any paid content creation course or coaching before?</label>
+    <div class="opts-grid">
+      <button class="opt-btn" onclick="selectSingle(this,'q_prev')"><div class="opt-check">✓</div><span class="opt-text">No — this would be my first time</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_prev')"><div class="opt-check">✓</div><span class="opt-text">Yes — it helped but I need more</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_prev')"><div class="opt-check">✓</div><span class="opt-text">Yes — it didn't work and I'm trying again</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_prev')"><div class="opt-check">✓</div><span class="opt-text">Only free resources — YouTube, blogs etc.</span></button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>What is your biggest fear about joining this cohort?</label>
+    <div class="opts-grid">
+      <button class="opt-btn" onclick="selectSingle(this,'q_fear')"><div class="opt-check">✓</div><span class="opt-text">I'll pay and not get results</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_fear')"><div class="opt-check">✓</div><span class="opt-text">I won't be able to keep up with others</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_fear')"><div class="opt-check">✓</div><span class="opt-text">I'll do the work but my content won't improve</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_fear')"><div class="opt-check">✓</div><span class="opt-text">I don't have a fear — I'm ready to commit fully</span></button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>This cohort has a token registration model — you can start with any amount and pay the rest later. How much can you commit as a token today?</label>
+    <div class="opts-grid-2">
+      <button class="opt-btn" onclick="selectSingle(this,'q_token')"><div class="opt-check">✓</div><span class="opt-text">₹99 – ₹499 — token start</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_token')"><div class="opt-check">✓</div><span class="opt-text">₹500 – ₹1,499 — partial</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_token')"><div class="opt-check">✓</div><span class="opt-text">₹1,500 – ₹2,498 — almost full</span></button>
+      <button class="opt-btn" onclick="selectSingle(this,'q_token')"><div class="opt-check">✓</div><span class="opt-text">₹2,499 — full amount right now</span></button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>If you are selected, what is the one thing you commit to doing in the first 7 days of the cohort?</label>
+    <textarea class="form-input" id="q_commit" placeholder="Write your personal commitment to Tushar here..."></textarea>
+    <div class="form-error" id="commitErr">Please write your commitment (at least 20 characters).</div>
+  </div>
+
+  <div class="trust-banner tb-orange">
+    <div class="tb-icon">🏁</div>
+    <div><strong>You made it to the final section.</strong> This alone puts you in the top 20% of applicants. Submit your application — Tushar reviews every single one personally.</div>
+  </div>
+
+  <div class="nav-wrap">
+    <button class="btn-back" onclick="goTo(5)">← Back</button>
+    <button class="btn-next" onclick="submitApplication()">Submit Application →</button>
+  </div>
+</div>
+
+<!-- SCREEN 7: RESULT -->
+<div class="screen" id="s7">
+
+  <!-- REPORT CARD — screenshot optimised -->
+  <div id="reportCard" style="width:100%;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:20px">
+
+    <!-- Card header -->
+    <div style="background:var(--orange);padding:14px 20px;display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.1em;color:var(--white)">CONTENT CRORE · APPLICATION REPORT</div>
+        <div style="font-size:11px;color:rgba(245,240,232,.7);margin-top:2px">Founding Batch 1 · @tusharvakt</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.1em;color:rgba(245,240,232,.7)">SCORE</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--white);line-height:1" id="rcScore">0</div>
+        <div style="font-size:10px;color:rgba(245,240,232,.6)">/100</div>
+      </div>
+    </div>
+
+    <!-- Applicant identity -->
+    <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <div>
+        <div style="font-size:16px;font-weight:700;color:var(--white)" id="rcName">—</div>
+        <div style="font-size:12px;color:var(--muted)" id="rcContact">—</div>
+      </div>
+      <div id="rcVerdict" style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.08em;padding:6px 16px;border-radius:100px">—</div>
+    </div>
+
+    <!-- Score breakdown -->
+    <div style="padding:14px 20px;border-bottom:1px solid var(--border)">
+      <div style="font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:10px">Score Breakdown — Note to Tushar</div>
+      <div id="rcBreakdown" style="display:flex;flex-direction:column;gap:6px"></div>
+    </div>
+
+    <!-- Key signals -->
+    <div style="padding:14px 20px;border-bottom:1px solid var(--border)">
+      <div style="font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:10px">Key Signals</div>
+      <div id="rcSignals" style="display:flex;flex-direction:column;gap:5px"></div>
+    </div>
+
+    <!-- Tushar's note -->
+    <div style="padding:14px 20px">
+      <div style="font-size:10px;color:var(--ol);letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:8px">📣 Tushar's Assessment</div>
+      <div style="font-size:13px;color:var(--cream);line-height:1.7;font-style:italic" id="rcNote">—</div>
+    </div>
+  </div>
+
+  <!-- Verdict + Action -->
+  <div class="verdict-box" id="verdictBox">
+    <div class="v-title" id="vTitle"></div>
+    <div class="v-desc" id="vDesc"></div>
+  </div>
+
+  <!-- PAYMENT SECTION — only visible for 60+ -->
+  <div id="paymentSection" style="display:none;width:100%">
+    <div style="background:rgba(45,184,122,.07);border:1px solid rgba(45,184,122,.3);border-radius:8px;padding:16px 18px;margin-bottom:14px">
+      <div style="font-size:11px;color:var(--gl);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">✅ You Are Selected — Complete Your Registration</div>
+      <div style="font-size:13px;color:var(--cream);line-height:1.7;margin-bottom:14px">Your seat is held for <strong style="color:var(--white)">24 hours</strong>. Two options to register:</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <a href="https://rzp.io/rzp/cohortbatch1payment" target="_blank" style="display:block;background:var(--orange);color:var(--white);text-decoration:none;padding:14px 20px;border-radius:6px;font-weight:700;font-size:15px;text-align:center;transition:all .2s">Pay Full Amount — ₹2,499 →</a>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:14px 18px">
+          <div style="font-size:12px;font-weight:700;color:var(--white);margin-bottom:4px">Token Registration — Start With Any Amount</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px">Pay any amount from ₹99 onwards as a token. Your seat is secured. Pay the remaining balance before Session 2 on June 14.</div>
+          <a href="https://rzp.io/rzp/Oc9RaoXu" target="_blank" style="display:block;background:var(--card);color:var(--ol);text-decoration:none;padding:11px 16px;border-radius:5px;font-weight:600;font-size:13px;text-align:center;border:1px solid var(--orange)">Pay Token Amount →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BELOW 60 SECTION — only visible for below 60 -->
+  <div id="belowSection" style="display:none;width:100%">
+    <div style="background:rgba(122,117,109,.07);border:1px solid rgba(122,117,109,.25);border-radius:8px;padding:18px 20px;margin-bottom:14px">
+      <div style="font-size:14px;font-weight:700;color:var(--cream);margin-bottom:10px;line-height:1.5">A Personal Note From Tushar</div>
+      <div style="font-size:13px;color:var(--cream);line-height:1.8" id="belowNote">—</div>
+    </div>
+    <a href="https://tusharvakt.github.io/register.html" target="_blank" style="display:block;background:var(--card);color:var(--white);text-decoration:none;padding:13px 20px;border-radius:6px;font-weight:600;font-size:14px;text-align:center;border:1px solid var(--border);transition:all .2s">Attend Free Workshop First →</a>
+  </div>
+
+  <!-- SCREENSHOT INSTRUCTION -->
+  <div class="screenshot-note" style="margin-top:16px">
+    📸 <strong>Screenshot the report card above</strong> and share it in the WhatsApp group.<br>Tushar reads every single one and responds personally within 24 hours.
+  </div>
+
+  <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:18px;line-height:1.7">
+    Content Crore Foundation Cohort — Batch 1<br>June 7, 14, 21, 28 · 10AM IST · @tusharvakt
+  </p>
+</div>
+
+<script>
+var appData = {};
+var kqAnswers = {kq1:null,kq2:null,kq3:null,kq4:null,kq5:null};
+var kqCorrect = {kq1:false,kq2:false,kq3:false,kq4:false,kq5:false};
+
+function goTo(n){
+  // Validate before advancing
+  if(n===2){
+    var name=document.getElementById('nameInput').value.trim();
+    var phone=document.getElementById('phoneInput').value.trim();
+    var insta=document.getElementById('instaInput').value.trim();
+    var ok=true;
+    if(!name){document.getElementById('nameErr').style.display='block';ok=false;}else{document.getElementById('nameErr').style.display='none';}
+    if(!phone){document.getElementById('phoneErr').style.display='block';ok=false;}else{document.getElementById('phoneErr').style.display='none';}
+    if(!insta){document.getElementById('instaErr').style.display='block';ok=false;}else{document.getElementById('instaErr').style.display='none';}
+    if(!ok) return;
+    appData.name=name; appData.phone=phone; appData.insta=insta;
+  }
+  if(n===4){
+    var why=document.getElementById('q_why').value.trim();
+    if(why.length<20){document.getElementById('whyErr').style.display='block';return;}
+    document.getElementById('whyErr').style.display='none';
+    appData.why=why;
+  }
+  // Show screen
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('s'+n).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function selectSingle(btn, group){
+  document.querySelectorAll('#s'+getCurrentScreen()+' [onclick*="\''+group+'\'"]').forEach(function(b){b.classList.remove('selected');});
+  btn.classList.add('selected');
+  if(!appData.answers) appData.answers={};
+  appData.answers[group] = btn.querySelector('.opt-text').textContent.trim();
+}
+
+function selectMulti(btn, group){
+  btn.classList.toggle('multi-selected');
+  if(!appData.answers) appData.answers={};
+  var sel=[];
+  document.querySelectorAll('#q_'+group.replace('q_','')+' .multi-selected').forEach(function(b){sel.push(b.querySelector('.opt-text').textContent.trim());});
+  appData.answers[group]=sel.join(' | ');
+}
+
+function selectKQ(btn, qid, isCorrect){
+  document.querySelectorAll('#'+qid+' .kq-opt').forEach(function(b){b.classList.remove('selected');});
+  btn.classList.add('selected');
+  kqAnswers[qid]=btn.textContent.trim();
+  kqCorrect[qid]=isCorrect;
+}
+
+function getCurrentScreen(){
+  var screens=['s1','s2','s3','s4','s5','s6','s7'];
+  for(var i=0;i<screens.length;i++){
+    if(document.getElementById(screens[i]).classList.contains('active')) return screens[i].replace('s','');
+  }
+  return '1';
+}
+
+function submitApplication(){
+  var commit=document.getElementById('q_commit').value.trim();
+  if(commit.length<20){document.getElementById('commitErr').style.display='block';return;}
+  document.getElementById('commitErr').style.display='none';
+  appData.commit=commit;
+  calculateAndShow();
+}
+
+function calculateAndShow(){
+  var score=0;
+  var ans=appData.answers||{};
+
+  // Knowledge: 25 pts
+  var kqPts=0;
+  Object.keys(kqCorrect).forEach(function(k){ if(kqCorrect[k]) kqPts+=5; });
+  score+=kqPts;
+
+  // Commitment: 25 pts
+  if(ans.q_hours){
+    if(ans.q_hours.indexOf('10+')>-1) score+=10;
+    else if(ans.q_hours.indexOf('5 to 10')>-1) score+=7;
+    else if(ans.q_hours.indexOf('3 to 5')>-1) score+=4;
+    else score+=1;
+  }
+  if(ans.q_attend){
+    if(ans.q_attend.indexOf('block all 4')>-1) score+=10;
+    else if(ans.q_attend.indexOf('3 of 4')>-1) score+=6;
+    else if(ans.q_attend.indexOf('try')>-1) score+=3;
+  }
+  if(ans.q_assignment){
+    if(ans.q_assignment.indexOf('no matter what')>-1) score+=5;
+    else if(ans.q_assignment.indexOf('more time')>-1) score+=3;
+  }
+
+  // Intent: 25 pts
+  if(ans.q_goal) score+=5;
+  if(ans.q_timeline){
+    if(ans.q_timeline.indexOf('30 days')>-1) score+=8;
+    else if(ans.q_timeline.indexOf('3 months')>-1) score+=6;
+    else score+=4;
+  }
+  if(appData.why && appData.why.length>50) score+=7;
+  else if(appData.why && appData.why.length>20) score+=4;
+  if(ans.q_fear && ans.q_fear.indexOf('no fear')>-1) score+=5;
+
+  // Token: 15 pts
+  if(ans.q_token){
+    if(ans.q_token.indexOf('2,499')>-1) score+=15;
+    else if(ans.q_token.indexOf('1,500')>-1) score+=10;
+    else if(ans.q_token.indexOf('500')>-1) score+=6;
+    else score+=3;
+  }
+
+  // Commit text: 10 pts
+  if(appData.commit && appData.commit.length>80) score+=10;
+  else if(appData.commit && appData.commit.length>40) score+=6;
+  else score+=3;
+
+  score=Math.min(score,100);
+  showResult(score, kqPts);
+}
+
+function showResult(score, kqPts){
+  var ans=appData.answers||{};
+
+  // Report Card
+  document.getElementById('rcScore').textContent=score;
+  document.getElementById('rcName').textContent=appData.name||'Applicant';
+  document.getElementById('rcContact').textContent=(appData.insta||'')+'  ·  '+(appData.phone||'');
+
+  var vc=document.getElementById('rcVerdict');
+  if(score>=60){
+    vc.textContent='SELECTED';
+    vc.style.cssText='font-family:Bebas Neue,sans-serif;font-size:14px;letter-spacing:.08em;padding:5px 14px;border-radius:100px;background:rgba(45,184,122,.15);color:#2DB87A;border:1px solid rgba(45,184,122,.4)';
+  } else if(score>=40){
+    vc.textContent='WAITLIST';
+    vc.style.cssText='font-family:Bebas Neue,sans-serif;font-size:14px;letter-spacing:.08em;padding:5px 14px;border-radius:100px;background:rgba(201,148,12,.15);color:#C9940C;border:1px solid rgba(201,148,12,.4)';
+  } else {
+    vc.textContent='NOT YET';
+    vc.style.cssText='font-family:Bebas Neue,sans-serif;font-size:14px;letter-spacing:.08em;padding:5px 14px;border-radius:100px;background:rgba(192,57,43,.1);color:#FF8C70;border:1px solid rgba(192,57,43,.35)';
+  }
+
+  // Score breakdown
+  var commitPts=Math.min(score-kqPts,25);
+  var intentPts=Math.min(score-kqPts-commitPts,25);
+  var tokenPts=ans.q_token?(ans.q_token.indexOf('2,499')>-1?15:ans.q_token.indexOf('1,500')>-1?10:ans.q_token.indexOf('500')>-1?6:3):0;
+  var commitTextPts=appData.commit&&appData.commit.length>80?10:appData.commit&&appData.commit.length>40?6:3;
+
+  var breakdown=[
+    ['Knowledge & Awareness', kqPts, 25],
+    ['Commitment Level', Math.min(commitPts,25), 25],
+    ['Intent & Clarity', Math.min(intentPts,25), 25],
+    ['Investment Readiness', tokenPts, 15],
+    ['Commitment Statement', commitTextPts, 10]
+  ];
+  var bd=document.getElementById('rcBreakdown');
+  bd.innerHTML='';
+  breakdown.forEach(function(item){
+    var pct=Math.round((item[1]/item[2])*100);
+    var col=pct>=80?'#2DB87A':pct>=50?'#C9940C':'#FF8C70';
+    var div=document.createElement('div');
+    div.style.cssText='display:flex;align-items:center;gap:10px;font-size:12px';
+    div.innerHTML='<div style="min-width:150px;color:#9A958D">'+item[0]+'</div>'
+      +'<div style="flex:1;height:5px;background:#252320;border-radius:3px;overflow:hidden">'
+      +'<div style="height:100%;width:'+pct+'%;background:'+col+';border-radius:3px"></div></div>'
+      +'<div style="min-width:38px;text-align:right;font-weight:700;color:'+col+'">'+item[1]+'/'+item[2]+'</div>';
+    bd.appendChild(div);
+  });
+
+  // Key signals
+  var signals=[
+    ['Primary Goal', ans.q_goal||'Not specified'],
+    ['Target Timeline', ans.q_timeline||'Not specified'],
+    ['Hours/Week Available', ans.q_hours||'Not specified'],
+    ['Attending All 4 Sessions', ans.q_attend||'Not specified'],
+    ['Token Amount Ready', ans.q_token||'Not specified'],
+    ['Biggest Fear', ans.q_fear||'Not specified'],
+    ['Knowledge Score', kqPts+'/25 ('+Math.round(kqPts/25*100)+'%)'],
+    ['Personal Commitment', appData.commit?'"'+appData.commit.substring(0,70)+(appData.commit.length>70?'...':'')+'"':'Not provided']
+  ];
+  var sg=document.getElementById('rcSignals');
+  sg.innerHTML='';
+  signals.forEach(function(s){
+    var div=document.createElement('div');
+    div.style.cssText='display:flex;gap:8px;font-size:12px;line-height:1.55;padding:3px 0';
+    div.innerHTML='<span style="color:#FF6B35;min-width:160px;font-weight:600;flex-shrink:0">'+s[0]+':</span>'
+      +'<span style="color:#EDE8DE">'+s[1]+'</span>';
+    sg.appendChild(div);
+  });
+
+  // Tushar note
+  var note='';
+  if(score>=80) note='Outstanding application — high knowledge, strong commitment, clear intent. Exactly the profile that gets results in 4 weeks. Recommend immediate selection.';
+  else if(score>=60) note='Solid application. Good intent and awareness. Commitment is there — needs the system. Will benefit most from Sessions 1 and 2. Recommended for Batch 1.';
+  else if(score>=40) note='Genuine interest but some commitment signals are weak. Consider a short WhatsApp conversation before deciding. Could be ready with one direct conversation.';
+  else note='Applicant is at the very start of their journey. Foundation knowledge gaps are significant. Recommend attending the free workshop first — reapplication in 2-3 weeks would look very different.';
+  document.getElementById('rcNote').textContent=note;
+
+  // Verdict
+  var vbox=document.getElementById('verdictBox');
+  var vtitle=document.getElementById('vTitle');
+  var vdesc=document.getElementById('vDesc');
+  if(score>=60){
+    vbox.className='verdict-box v-selected';
+    vtitle.textContent='You Are Selected — Batch 1';
+    vdesc.textContent='Your application score is '+score+'/100. You have shown the commitment and clarity Tushar looks for. Your seat is available for the next 24 hours.';
+    document.getElementById('paymentSection').style.display='block';
+    document.getElementById('belowSection').style.display='none';
+  } else if(score>=40){
+    vbox.className='verdict-box v-waitlist';
+    vtitle.textContent='Waitlist — You Are Very Close';
+    vdesc.textContent='Your score is '+score+'/100. You are genuinely interested — a few commitment signals need to be stronger. You are on the priority waitlist. Tushar will personally reach out.';
+    document.getElementById('paymentSection').style.display='none';
+    document.getElementById('belowSection').style.display='block';
+    document.getElementById('belowNote').textContent='Aap genuinely chahte hain — lekin kuch answers mein commitment thoda weak tha. Iska matlab rejection nahi hai. Directly WhatsApp karo Tushar ko — ek short conversation se sab clear ho sakta hai. — @tusharvakt';
+  } else {
+    vbox.className='verdict-box v-reapply';
+    vtitle.textContent='Not Ready Yet — But This Is Honest';
+    vdesc.textContent='Your score is '+score+'/100. The cohort is built for people ready to execute. Right now a few key foundations are still missing — and that is completely okay.';
+    document.getElementById('paymentSection').style.display='none';
+    document.getElementById('belowSection').style.display='block';
+    document.getElementById('belowNote').textContent='Aapki honesty appreciate karta hoon. Abhi kuch cheezein clear nahi hain — niche, goals, commitment level. Solution simple hai: pehle free workshop attend karo (May 24, 10AM). 2 hafte apply karo. Phir wapas aao — score bahut different hoga. Main wait karunga. — Tushar (@tusharvakt)';
+  }
+
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('s7').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function kqScore(){
+  var s=0;
+  Object.keys(kqCorrect).forEach(function(k){if(kqCorrect[k])s+=5;});
+  return s;
+}
+</script>
+</body>
+</html>
